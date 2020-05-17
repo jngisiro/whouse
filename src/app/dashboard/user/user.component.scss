@@ -1,0 +1,35 @@
+.dashboard {
+  margin-bottom: 100px;
+  .tabs {
+    display: flex;
+    flex-flow: row;
+    list-style: none;
+    justify-content: space-around;
+    padding: 10px 0;
+    align-self: center;
+  }
+
+  .summary {
+    border-top: 1px double #000;
+    border-bottom: 1px double #000;
+  }
+
+  .greeting {
+    text-align: center;
+    margin: 20px 0;
+
+    h1 {
+      font-size: 40px;
+      font-weight: 400;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+  }
+}
+
+.active {
+  background-color: #000;
+  color: #fff;
+}
