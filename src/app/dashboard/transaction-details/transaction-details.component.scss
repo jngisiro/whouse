@@ -1,0 +1,26 @@
+.details {
+  width: 70vw;
+  margin: 20px auto;
+
+  h1 {
+    font-size: 40px;
+    font-weight: 200;
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  h3 {
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+
+  .info {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    padding: 20px;
+    box-shadow: 0 0 2px grey;
+    border-radius: 5px;
+  }
+}

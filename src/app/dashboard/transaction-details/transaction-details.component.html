@@ -1,0 +1,44 @@
+<section class="details">
+  <h1>Payload Details</h1>
+
+  <app-loading *ngIf="loading"></app-loading>
+
+  <div *ngIf="!loading && !error" class="info">
+    <div>
+      <h3>Delivery Date</h3>
+      <p>{{ transaction.deliveryDate | date }}</p>
+
+      <h3>Payload Items</h3>
+      <ul>
+        <li *ngFor="let item of transaction.payload">{{ item }}</li>
+      </ul>
+
+      <h3>Payment Voucher Number</h3>
+      <p>{{ transaction.paymentVoucherNumber }}</p>
+    </div>
+
+    <div>
+      <h3>Purchase Order Number</h3>
+      <p>{{ transaction.purchaseOrderNumber }}</p>
+
+      <h3>Project Code</h3>
+      <p>{{ transaction.projectCode }}</p>
+
+      <h3>Activity Line</h3>
+      <p>{{ transaction.activityLine }}</p>
+
+      <h3>Payment Requisition Date</h3>
+      <p>{{ transaction.paymentRequisitionDate | date }}</p>
+
+      <h3>Amount to be paid</h3>
+      <p>Ugx.{{ transaction.amountToBePaid }}</p>
+    </div>
+  </div>
+
+  <app-comments [comments]="transaction?.comments"></app-comments>
+
+  <div *ngIf="error">
+    <h3>There was an error loading the transaction</h3>
+    <button>Try again</button>
+  </div>
+</section>

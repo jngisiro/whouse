@@ -3,6 +3,7 @@
 
   <ul>
     <li><a routerLink="/">Contact Admin</a></li>
-    <li><a routerLink="/">Logout</a></li>
+    <li *ngIf="user"><a routerLink="/" (click)="onLogout()">Logout</a>
+    </li>
   </ul>
 </nav>

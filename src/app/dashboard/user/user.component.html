@@ -1,59 +1,50 @@
 <section class="dashboard">
   <div class="greeting">
-    <h1>Hi, Jonah</h1>
-    <p>This is your accout summary as of Monday, 21 June 2020</p>
+    <h1>Hi, {{ user.firstname }}</h1>
+    <p>This is your account summary as of {{ currentdate | date }}</p>
+    <a routerLink="/new">Add new payload</a>
   </div>
-  <ul class="tabs">
-    <li>Total Submitted</li>
+  <ul class="tabs head">
+    <li class="active">Total Submitted</li>
     <li>Pending Finance Review</li>
     <li>Payables Pending</li>
     <li>Rejected By Area Manager</li>
   </ul>
 
-  <div class="summary">
-    <ul class="tabs">
-      <li>Delivery Date</li>
-      <li>Tracking Number</li>
-      <li>Voucher Number</li>
-      <li>Purchase Order Number</li>
-      <li>Activity Line</li>
-      <li>Amount Paid</li>
-    </ul>
+  <app-loading *ngIf="loading"></app-loading>
+  <div *ngIf="!loading" class="transactions">
+    <div *ngIf="empty" class="empty">
+      ...<br />
+      No transactions yet
+    </div>
+
+    <div class="table-container" role="table" aria-label="Transactions">
+      <div class="flex-table header" role="rowgroup">
+        <div class="flex-row first" role="columnheader">Delivery Date</div>
+        <div class="flex-row" role="columnheader">Tracking Number</div>
+        <div class="flex-row" role="columnheader">Voucher Number</div>
+        <div class="flex-row" role="columnheader">Amount to be paid</div>
+        <div class="flex-row" role="columnheader">Activity Line</div>
+      </div>
+      <div
+        *ngFor="let transaction of transactions"
+        class="flex-table row"
+        role="rowgroup"
+        (click)="onSelect(transaction._id)"
+      >
+        <div class="flex-row first" role="cell">
+          <span class="flag-icon flag-icon-gb"></span>
+          {{ transaction.deliveryDate | date }}
+        </div>
+        <div class="flex-row" role="cell">{{ transaction._id }}</div>
+        <div class="flex-row" role="cell">
+          {{ transaction.paymentVoucherNumber }}
+        </div>
+        <div class="flex-row" role="cell">
+          {{ transaction.amountToBePaid || "-" }}
+        </div>
+        <div class="flex-row" role="cell">{{ transaction.activityLine }}</div>
+      </div>
+    </div>
   </div>
-
-  <ul class="tabs">
-    <li>12 - 06 - 2020</li>
-    <li>124385478340</li>
-    <li>10003932</li>
-    <li>11029932</li>
-    <li>12 L</li>
-    <li>Ugx 15,000,000</li>
-  </ul>
-
-  <ul class="tabs">
-    <li>12 - 06 - 2020</li>
-    <li>124385478340</li>
-    <li>10003932</li>
-    <li>11029932</li>
-    <li>12 L</li>
-    <li>Ugx 15,000,000</li>
-  </ul>
-
-  <ul class="tabs">
-    <li>12 - 06 - 2020</li>
-    <li>124385478340</li>
-    <li>10003932</li>
-    <li>11029932</li>
-    <li>12 L</li>
-    <li>Ugx 15,000,000</li>
-  </ul>
-
-  <ul class="tabs">
-    <li>12 - 06 - 2020</li>
-    <li>124385478340</li>
-    <li>10003932</li>
-    <li>11029932</li>
-    <li>12 L</li>
-    <li>Ugx 15,000,000</li>
-  </ul>
 </section>

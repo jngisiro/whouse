@@ -1,0 +1,32 @@
+<div class="comments">
+  <h2>Comments</h2>
+  <div *ngFor="let comment of comments" class="comment">
+    <div class="dp"></div>
+    <div class="message">
+      <h4>
+        {{ comment.user.firstname }} {{ comment.user.lastname }} |
+        {{ comment.user.role }}
+      </h4>
+      <div>
+        {{ comment.message }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="comment__add">
+    <form class="form" (ngSubmit)="onComment(form)" #form="ngForm">
+      <textarea
+        ngModel
+        name="comment"
+        #comment="ngModel"
+        required
+        class="edit"
+        rows="5"
+        placeholder="Leave a comment . . ."
+      ></textarea>
+      <button class="submit" *ngIf="!loading" [disabled]="form.invalid">
+        Comment
+      </button>
+    </form>
+  </div>
+  <app-loading *ngIf="loading"></app-loading>
+</div>
