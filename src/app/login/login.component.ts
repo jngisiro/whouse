@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.auth.user.subscribe((user) => {
       this.user = user;
 
-      if (user) this.router.navigate(['/user']);
+      if (user) this.router.navigate([this.user.role]);
     });
   }
 
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.auth.loginUser(name, password).subscribe(
       (response) => {
         this.loading = false;
-        this.router.navigate(['/user']);
+        this.router.navigate([this.user.role]);
       },
       (err) => {
         this.loading = false;

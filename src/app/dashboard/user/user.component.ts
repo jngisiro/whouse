@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     this.auth.user.subscribe((user) => {
-      if (user) this.user = user;
+      if (user && user.role === 'user') this.user = user;
       else this.router.navigate(['/']);
     });
     this.currentdate = Date.now();

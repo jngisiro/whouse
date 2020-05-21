@@ -1,0 +1,62 @@
+<section class="admin-form">
+  <h1>Create New User</h1>
+  <form class="form" (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <label for="firstname">
+      First Name
+      <input
+        type="text"
+        #firstname="ngModel"
+        ngModel
+        name="firstname"
+        required
+      />
+    </label>
+
+    <label for="lastname">
+      Last Name
+      <input type="text" #lastname="ngModel" ngModel name="lastname" required />
+    </label>
+
+    <label for="email">
+      Email Address
+      <input type="email" #email="ngModel" ngModel name="email" required />
+    </label>
+
+    <label for="role">
+      Select User's Role
+      <select ngModel #role="ngModel" name="role" required>
+        <option>admin</option>
+        <option>user</option>
+        <option>accounts</option>
+        <option>finance</option>
+        <option>manager</option>
+      </select>
+    </label>
+
+    <label for="password">
+      Password
+      <input
+        type="password"
+        #password="ngModel"
+        ngModel
+        name="password"
+        required
+      />
+    </label>
+
+    <label for="passwordConfirm">
+      Confirm Password
+      <input
+        type="password"
+        #passwordConfirm="ngModel"
+        ngModel
+        name="passwordConfirm"
+        required
+      />
+    </label>
+
+    <button *ngIf="!loading" [disabled]="form.invalid">Create User</button>
+
+    <app-loading *ngIf="loading"></app-loading>
+  </form>
+</section>

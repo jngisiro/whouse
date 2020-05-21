@@ -19,6 +19,12 @@ export class AuthService {
     });
   }
 
+  createUser(user) {
+    return this.http.post('https://w-house.herokuapp.com/api/v1/users', {
+      ...user,
+    });
+  }
+
   loginUser(email: string, password: string) {
     return this.http
       .post('https://w-house.herokuapp.com/api/v1/users/login', {
@@ -32,6 +38,7 @@ export class AuthService {
             response.data.user.email,
             response.data.user.firstname,
             response.data.user.lastname,
+            response.data.user.role,
             response.token,
             response.expiresIn
           );
@@ -49,6 +56,7 @@ export class AuthService {
       userData.email,
       userData.firstname,
       userData.lastname,
+      userData.role,
       userData._token,
       new Date(userData._tokenExpirationDate)
     );
@@ -62,6 +70,7 @@ export class AuthService {
     email: string,
     firstname: string,
     lastname: string,
+    role: string,
     token: string,
     expiresIn: number
   ) {
@@ -69,7 +78,14 @@ export class AuthService {
       new Date().getTime() + new Date(expiresIn).getTime()
     );
 
-    const user = new User(email, firstname, lastname, token, expirationDate);
+    const user = new User(
+      email,
+      firstname,
+      lastname,
+      role,
+      token,
+      expirationDate
+    );
     this.user.next(user);
     localStorage.setItem('userData', JSON.stringify(user));
   }

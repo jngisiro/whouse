@@ -1,1 +1,53 @@
-<p>manager works!</p>
+<section class="dashboard">
+  <div class="greeting">
+    <h1>Hi, {{ user.firstname }}</h1>
+    <p>
+      As the Area manager, these are the following records that have been
+      forwarded Finance of
+      {{ currentdate | date }}
+    </p>
+  </div>
+  <ul class="tabs head">
+    <li class="active">All</li>
+    <li>Pending</li>
+    <li>Approved</li>
+    <li>Rejected</li>
+  </ul>
+
+  <app-loading *ngIf="loading"></app-loading>
+  <div *ngIf="!loading" class="transactions">
+    <div *ngIf="empty" class="empty">
+      ...<br />
+      No transactions yet
+    </div>
+
+    <div class="table-container" role="table" aria-label="Transactions">
+      <div class="flex-table header" role="rowgroup">
+        <div class="flex-row first" role="columnheader">Delivery Date</div>
+        <div class="flex-row" role="columnheader">Tracking Number</div>
+        <div class="flex-row" role="columnheader">Voucher Number</div>
+        <div class="flex-row" role="columnheader">Amount to be paid</div>
+        <div class="flex-row" role="columnheader">Activity Line</div>
+      </div>
+      <div
+        *ngFor="let transaction of transactions"
+        class="flex-table row"
+        role="rowgroup"
+        (click)="onSelect(transaction._id)"
+      >
+        <div class="flex-row first" role="cell">
+          <span class="flag-icon flag-icon-gb"></span>
+          {{ transaction.deliveryDate | date }}
+        </div>
+        <div class="flex-row" role="cell">{{ transaction._id }}</div>
+        <div class="flex-row" role="cell">
+          {{ transaction.paymentVoucherNumber }}
+        </div>
+        <div class="flex-row" role="cell">
+          {{ transaction.amountToBePaid || "-" }}
+        </div>
+        <div class="flex-row" role="cell">{{ transaction.activityLine }}</div>
+      </div>
+    </div>
+  </div>
+</section>

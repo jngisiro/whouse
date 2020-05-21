@@ -3,6 +3,7 @@ export class User {
     public email: string,
     public firstname: string,
     public lastname: string,
+    public role: string,
     private _token: string,
     private _tokenExpirationDate: Date
   ) {}

@@ -1,0 +1,153 @@
+.dashboard {
+  margin-bottom: 100px;
+  .tabs {
+    display: flex;
+    flex-flow: row;
+    list-style: none;
+    justify-content: space-around;
+    padding: 10px 0;
+    align-self: stretch;
+  }
+
+  .head {
+    background-color: #9ff5b9;
+    li {
+      cursor: pointer;
+      &.active {
+        border-bottom: 1px solid #000;
+      }
+    }
+  }
+
+  .greeting {
+    text-align: center;
+    background-color: #9ff5b9;
+    color: #000;
+    padding: 40px 0;
+
+    h1 {
+      font-size: 40px;
+      font-weight: 200;
+    }
+
+    p {
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: 200;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      background-color: #1976d2;
+      padding: 8px 30px;
+      // transition: 1s ease-out;
+      &:hover {
+        background-color: #1565c0;
+      }
+
+      &:active {
+        background-color: #1976d2;
+      }
+    }
+  }
+
+  .transactions {
+    .empty {
+      text-align: center;
+      font-weight: 100;
+      font-size: 30px;
+      margin-top: 100px;
+    }
+
+    $table-header: #1976d2;
+    $table-header-border: #1565c0;
+    $table-border: #d9d9d9;
+    $row-bg: #f4f2f1;
+
+    div,
+    a {
+      box-sizing: border-box;
+    }
+
+    .table-container {
+      display: block;
+      margin: 2em auto;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .flex-table {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 20%);
+      grid-template-rows: 100% auto;
+      border-left: solid 1px $table-border;
+      transition: 0.5s;
+      cursor: pointer;
+      // background: #c5cae9;
+      // padding: 10px 0;
+      height: 50px;
+
+      &:first-of-type {
+        border-top: solid 1px $table-header-border;
+        border-left: solid 1px $table-header-border;
+      }
+      &:first-of-type .flex-row {
+        background: $table-header;
+        color: white;
+        border-color: $table-header-border;
+        cursor: default;
+      }
+      &.row:nth-child(odd) .flex-row {
+        background: $row-bg;
+        // background: #c5cae9;
+        // padding: 10px 0;
+      }
+      &:hover {
+        transition: 500ms;
+        background-color: #c5cae9;
+        font-weight: 600;
+        font-size: 16px;
+      }
+
+      &:nth-child(odd):hover {
+        font-weight: 600;
+      }
+    }
+
+    .flex-row {
+      display: block;
+      padding: 200px 0;
+      text-align: center;
+      padding: 0.5em 0.5em;
+      border-right: solid 1px $table-border;
+      border-bottom: solid 1px $table-border;
+    }
+
+    .rowspan {
+      display: grid;
+      grid-template-columns: 25% 75%;
+      grid-template-rows: 100%;
+    }
+
+    .column {
+      width: 100%;
+      padding: 0;
+      .flex-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 33.3%);
+        grid-template-rows: 100% 100% 100%;
+        width: 100%;
+        padding: 0;
+        border: 0;
+        border-bottom: solid 1px $table-border;
+      }
+    }
+
+    .flex-cell {
+      text-align: center;
+      padding: 0.5em 0.5em;
+      border-right: solid 1px $table-border;
+    }
+  }
+}
