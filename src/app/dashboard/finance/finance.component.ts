@@ -32,7 +32,7 @@ export class FinanceComponent implements OnInit {
     });
     this.currentdate = Date.now();
 
-    this.ds.getAllTransaction().subscribe((transactions: any) => {
+    this.ds.getAllTransaction('finance').subscribe((transactions: any) => {
       this.transactions = transactions.data.transactions;
       this.loading = false;
       if (transactions) this.empty = false;

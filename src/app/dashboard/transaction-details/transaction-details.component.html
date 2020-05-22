@@ -31,7 +31,7 @@
       <p>{{ transaction.paymentRequisitionDate | date }}</p>
 
       <h3>Amount to be paid</h3>
-      <p>Ugx.{{ transaction.amountToBePaid }}</p>
+      <p>Ugx.{{ transaction.amountToBePaid | currency: "UGX ":"code" }}</p>
     </div>
   </div>
 

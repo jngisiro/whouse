@@ -7,8 +7,13 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
   constructor(private http: HttpClient) {}
 
-  getAllTransaction() {
-    return this.http.get('https://w-house.herokuapp.com/api/v1/transactions');
+  getAllTransaction(step: any) {
+    let url = 'https://w-house.herokuapp.com/api/v1/transactions';
+    if (step) {
+      url = `${url}?step=${step}`;
+    }
+
+    return this.http.get(url);
   }
 
   getTransactionById(id) {

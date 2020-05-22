@@ -1,16 +1,23 @@
 <section class="login-form">
   <h1>Login Here</h1>
   <p>Please Fill in your details to access the platform</p>
+  <p class="error">{{ error }}</p>
 
   <form class="form" (ngSubmit)="onSubmit(form)" #form="ngForm">
     <label for="name">
       Enter your name
-      <input type="text" ngModel name="name" #name="ngModel" required/>
+      <input type="text" ngModel name="name" #name="ngModel" required />
     </label>
 
     <label for="password">
       Enter your password
-      <input type="password" ngModel name="password" #password="ngModel" required/>
+      <input
+        type="password"
+        ngModel
+        name="password"
+        #password="ngModel"
+        required
+      />
     </label>
 
     <button *ngIf="!loading" [disabled]="form.invalid">Login</button>

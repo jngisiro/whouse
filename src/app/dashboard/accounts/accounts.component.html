@@ -1,7 +1,10 @@
 <section class="dashboard">
   <div class="greeting">
     <h1>Hi, {{ user.firstname }}</h1>
-    <p>This is the summary of all payloads in accounts as of {{ currentdate | date }}</p>
+    <p>
+      This is the summary of all payloads in accounts as of
+      {{ currentdate | date }}
+    </p>
   </div>
   <ul class="tabs head">
     <li class="active">Pending</li>
@@ -39,7 +42,7 @@
           {{ transaction.paymentVoucherNumber }}
         </div>
         <div class="flex-row" role="cell">
-          {{ transaction.amountToBePaid || "-" }}
+          {{ transaction.amountToBePaid | currency: "UGX ":"code" }}
         </div>
         <div class="flex-row" role="cell">{{ transaction.activityLine }}</div>
       </div>

@@ -3,7 +3,7 @@
     <h1>Hi, {{ user.firstname }}</h1>
     <p>
       As the Area manager, these are the following records that have been
-      forwarded Finance of
+      forwarded from Finance as of
       {{ currentdate | date }}
     </p>
   </div>
@@ -44,7 +44,7 @@
           {{ transaction.paymentVoucherNumber }}
         </div>
         <div class="flex-row" role="cell">
-          {{ transaction.amountToBePaid || "-" }}
+          {{ transaction.amountToBePaid | currency: "UGX ":"code" }}
         </div>
         <div class="flex-row" role="cell">{{ transaction.activityLine }}</div>
       </div>

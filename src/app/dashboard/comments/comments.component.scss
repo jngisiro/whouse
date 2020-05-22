@@ -7,7 +7,6 @@
   .submit {
     // flex-grow: 1;
     padding: 10px 40px;
-    float: right;
     background-color: #1976d2;
     color: #fff;
     border: none;
@@ -15,6 +14,16 @@
     cursor: pointer;
     margin-top: 5px;
     margin-bottom: 100px;
+
+    &.left {
+      float: right;
+      margin-right: 30px;
+      background-color: rgb(158, 7, 7);
+    }
+
+    &.right {
+      float: right;
+    }
 
     &:hover {
       background-color: #155fa8;

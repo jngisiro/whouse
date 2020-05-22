@@ -31,7 +31,7 @@ Item Three
     <label for="paymentVoucherNumber">
       Payment Voucher Number
       <input
-        type="text"
+        type="number"
         ngModel
         #paymentVoucherNumber="ngModel"
         required
@@ -42,11 +42,22 @@ Item Three
     <label for="purchaseOrderNumber">
       Purchase Order Number
       <input
-        type="text"
+        type="number"
         ngModel
         #purchaseOrderNumber="ngModel"
         required
         name="purchaseOrderNumber"
+      />
+    </label>
+
+    <label for="amountToBePaid">
+      Amount to be paid
+      <input
+        type="number"
+        ngModel
+        #amountToBePaid="ngModel"
+        required
+        name="amountToBePaid"
       />
     </label>
 

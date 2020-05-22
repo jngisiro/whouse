@@ -42,7 +42,7 @@
           {{ transaction.paymentVoucherNumber }}
         </div>
         <div class="flex-row" role="cell">
-          {{ transaction.amountToBePaid || "-" }}
+          {{ transaction.amountToBePaid | currency: "UGX ":"code" }}
         </div>
         <div class="flex-row" role="cell">{{ transaction.activityLine }}</div>
       </div>
