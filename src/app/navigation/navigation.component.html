@@ -3,6 +3,7 @@
 
   <ul>
     <li><a routerLink="/contact">Contact Admin</a></li>
+    <li *ngIf="user"><a routerLink="/">{{ user.firstname }} {{ user.lastname }}</a></li>
     <li *ngIf="user"><a routerLink="/" (click)="onLogout()">Logout</a>
     </li>
   </ul>
