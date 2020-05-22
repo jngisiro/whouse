@@ -23,11 +23,16 @@
         rows="5"
         placeholder="Leave a comment . . ."
       ></textarea>
-      <button class="submit right" *ngIf="!loading" [disabled]="form.invalid">
+      
+      <button
+        (click)="approve()"
+        class="submit right" 
+        *ngIf="!loading" [disabled]="form.invalid">
         Approve
       </button>
 
-      <button class="submit left" *ngIf="!loading" [disabled]="form.invalid">
+      <button (click)="reject()"
+        class="submit left" *ngIf="!loading" [disabled]="form.invalid">
         Reject
       </button>
     </form>

@@ -28,6 +28,15 @@ export class DataService {
     });
   }
 
+  step(id, step) {
+    return this.http.patch(
+      `https://w-house.herokuapp.com/api/v1/transactions/${id}`,
+      {
+        step,
+      }
+    );
+  }
+
   addComment(id, comment) {
     return this.http.post(
       `https://w-house.herokuapp.com/api/v1/transactions/${id}/comments`,

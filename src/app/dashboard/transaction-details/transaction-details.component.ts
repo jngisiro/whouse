@@ -20,7 +20,6 @@ export class TransactionDetailsComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.ds.getTransactionById(params['id']).subscribe(
         (response: any) => {
-          console.log(response);
           this.transaction = response.data.transaction;
           this.loading = false;
         },
