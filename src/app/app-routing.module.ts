@@ -8,11 +8,13 @@ import { AccountsComponent } from './dashboard/accounts/accounts.component';
 import { FinanceComponent } from './dashboard/finance/finance.component';
 import { ManagerComponent } from './dashboard/manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'user', component: UserComponent },
   { path: 'accounts', component: AccountsComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'finance', component: FinanceComponent },
   { path: 'manager', component: ManagerComponent },
   { path: 'admin', component: AdminComponent },

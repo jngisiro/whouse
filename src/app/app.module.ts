@@ -18,6 +18,7 @@ import { TransactionDetailsComponent } from './dashboard/transaction-details/tra
 import { NewpayloadComponent } from './dashboard/newpayload/newpayload.component';
 import { CommentsComponent } from './dashboard/comments/comments.component';
 import { AdminComponent } from './admin/admin.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AdminComponent } from './admin/admin.component';
     NewpayloadComponent,
     CommentsComponent,
     AdminComponent,
+    ContactComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [

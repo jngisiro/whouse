@@ -1,0 +1,25 @@
+<section class="contact-form">
+  <h1>Contact Admin</h1>
+  <form class="form" (ngSubmit)="onSubmit(form)" #form="ngForm">
+    <label for="name">
+      Full Name
+      <input type="text" ngModel #name="ngModel" name="name" required />
+    </label>
+
+    <label for="email">
+      Email Address
+      <input type="email" ngModel #email="ngModel" name="email" required />
+    </label>
+
+    <label for="full name">
+      Message
+      <textarea ngModel #message="ngModel" name="message" placeholder="Your Message" rows="7" required>
+
+      </textarea>
+    </label>
+
+    <button *ngIf="!loading" [disabled]="form.invalid">Login</button>
+
+    <app-loading *ngIf="loading"></app-loading>
+  </form>
+</section>
