@@ -23,11 +23,10 @@ export class CommentsComponent implements OnInit {
       .subscribe(
         (response) => {
           this.loading = false;
-          console.log(response);
+          this.ngOnInit();
         },
         (err) => {
           this.loading = false;
-          console.log(err);
         }
       );
   }

@@ -9,6 +9,7 @@ import { FinanceComponent } from './dashboard/finance/finance.component';
 import { ManagerComponent } from './dashboard/manager/manager.component';
 import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +22,8 @@ const routes: Routes = [
   { path: 'new', component: NewpayloadComponent },
   { path: 'transaction/:id', component: TransactionDetailsComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'error', component: PageNotFoundComponent },
+  { path: '**', redirectTo: 'error' },
 ];
 
 @NgModule({

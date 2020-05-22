@@ -19,6 +19,7 @@ import { NewpayloadComponent } from './dashboard/newpayload/newpayload.component
 import { CommentsComponent } from './dashboard/comments/comments.component';
 import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ContactComponent } from './contact/contact.component';
     CommentsComponent,
     AdminComponent,
     ContactComponent,
+    PageNotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
