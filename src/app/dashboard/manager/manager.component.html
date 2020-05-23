@@ -8,10 +8,18 @@
     </p>
   </div>
   <ul class="tabs head">
-    <li class="active">All</li>
-    <li>Pending</li>
-    <li>Approved</li>
-    <li>Rejected</li>
+    <li (click)="onTab('all')">
+      <a [ngClass]="{ active: tab === 'all' }">All</a>
+    </li>
+    <li (click)="onTab('pending')">
+      <a [ngClass]="{ active: tab === 'pending' }">Pending</a>
+    </li>
+    <li (click)="onTab('rejected')">
+      <a [ngClass]="{ active: tab === 'rejected' }">Rejected</a>
+    </li>
+    <li (click)="onTab('approved')">
+      <a [ngClass]="{ active: tab === 'approved' }">Approved</a>
+    </li>
   </ul>
 
   <app-loading *ngIf="loading"></app-loading>

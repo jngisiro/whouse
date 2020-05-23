@@ -15,7 +15,9 @@ export class UserComponent implements OnInit {
   empty: boolean = true;
   currentdate;
   transactions: Transaction[];
+  transactionCopy: Transaction[];
   loading: boolean = false;
+  tab = 'all';
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -32,9 +34,43 @@ export class UserComponent implements OnInit {
 
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions.data.transactions;
+      console.log(this.transactions);
+      this.transactionCopy = transactions.data.transactions;
       this.loading = false;
       if (transactions) this.empty = false;
     });
+  }
+
+  onTab(tab: string) {
+    switch (tab) {
+      case 'submitted':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step !== 'finance';
+        });
+        this.tab = 'submitted';
+        break;
+
+      case 'rejected':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step === 'finance';
+        });
+        this.tab = 'rejected';
+        break;
+      case 'all':
+        this.transactions = this.transactionCopy;
+        this.tab = 'all';
+        break;
+
+      case 'approved':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step === 'approved';
+        });
+        this.tab = 'approved';
+        break;
+
+      default:
+        break;
+    }
   }
 
   onSelect(id) {

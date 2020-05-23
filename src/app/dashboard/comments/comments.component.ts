@@ -69,28 +69,34 @@ export class CommentsComponent implements OnInit {
     this.loading = true;
 
     this.data
+      // Add comment. Get transaction's id from the url
       .addComment(this.router.snapshot.params['id'], form.value.comment)
       .subscribe(
         (response) => {
+          // Comment has been added
           console.log('Add comment', response);
           this.loading = false;
+          // Update the transaction and stepup the position of document
           this.data
             .step(
               this.router.snapshot.params['id'],
               this.stepDownRole(this.user.role)
             )
             .subscribe(
+              // Transaction has been updated
               (response) => {
                 this.loading = false;
                 console.log('StepDown', response);
               },
               (error) => {
+                // Problem Updating document
                 this.loading = false;
                 console.log('StepDown', error);
               }
             );
         },
         (err) => {
+          // Problem adding the comment
           this.loading = false;
           console.log('Add comment', err);
         }

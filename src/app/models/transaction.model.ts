@@ -11,4 +11,6 @@ export interface Transaction {
   amountToBePaid?: number;
   paymentRequisitionDate: Date;
   comments?: string[];
+  step?: string;
+  rejected: false;
 }

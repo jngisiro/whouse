@@ -7,14 +7,15 @@
     justify-content: space-around;
     padding: 10px 0;
     align-self: stretch;
+    color: #555;
   }
 
   .head {
     background-color: #f5d39f;
     li {
       cursor: pointer;
-      &.active {
-        border-bottom: 1px solid #000;
+      a {
+        padding: 3px 15px;
       }
     }
   }

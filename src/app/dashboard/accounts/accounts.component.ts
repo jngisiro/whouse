@@ -15,7 +15,9 @@ export class AccountsComponent implements OnInit {
   empty: boolean = true;
   currentdate;
   transactions: Transaction[];
+  transactionCopy: Transaction[];
   loading: boolean = false;
+  tab = 'all';
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -35,6 +37,7 @@ export class AccountsComponent implements OnInit {
 
     this.ds.getAllTransaction('accounts').subscribe((transactions: any) => {
       this.transactions = transactions.data.transactions;
+      this.transactionCopy = transactions.data.transactions;
       this.loading = false;
       if (transactions) this.empty = false;
     });
@@ -42,5 +45,39 @@ export class AccountsComponent implements OnInit {
 
   onSelect(id) {
     this.router.navigate(['/transaction', id]);
+  }
+
+  onTab(tab: string) {
+    switch (tab) {
+      case 'rejected':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return (
+            transaction.step === 'manager' || transaction.step === 'finance'
+          );
+        });
+        this.tab = 'rejected';
+        break;
+      case 'all':
+        this.transactions = this.transactionCopy;
+        this.tab = 'all';
+        break;
+
+      case 'approved':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step === 'approved';
+        });
+        this.tab = 'approved';
+        break;
+
+      case 'pending':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step === 'accounts';
+        });
+        this.tab = 'pending';
+        break;
+
+      default:
+        break;
+    }
   }
 }
