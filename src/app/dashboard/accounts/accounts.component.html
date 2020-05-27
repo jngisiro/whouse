@@ -47,7 +47,7 @@
           {{ transaction.deliveryDate | date }}
         </div>
         <div class="flex-row" role="cell">
-          {{ transaction.id || transaction._id }}
+          {{ transaction.id | number: "3.0" }}
         </div>
         <div class="flex-row" role="cell">
           {{ transaction.paymentVoucherNumber }}
