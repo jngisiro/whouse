@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { User } from './../../models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { Transaction } from 'src/app/models/transaction.model';
 
 @Component({
   selector: 'app-comments',
@@ -13,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class CommentsComponent implements OnInit {
   @Input() comments: any[];
+  @Input() step;
   loading: boolean = false;
   userSubscription: Subscription;
   user: User;
@@ -45,13 +47,14 @@ export class CommentsComponent implements OnInit {
           console.log('Add comment', response);
           this.loading = false;
           this.data
-            .step(
+            .stepUp(
               this.router.snapshot.params['id'],
               this.stepUpRole(this.user.role)
             )
             .subscribe(
               (response) => {
                 console.log('Step Up', response);
+                this.onCommentAdded();
               },
               (err) => {
                 console.log('Step Up', err);
@@ -78,7 +81,7 @@ export class CommentsComponent implements OnInit {
           this.loading = false;
           // Update the transaction and stepup the position of document
           this.data
-            .step(
+            .stepDown(
               this.router.snapshot.params['id'],
               this.stepDownRole(this.user.role)
             )
@@ -86,7 +89,7 @@ export class CommentsComponent implements OnInit {
               // Transaction has been updated
               (response) => {
                 this.loading = false;
-                console.log('StepDown', response);
+                this.onCommentAdded();
               },
               (error) => {
                 // Problem Updating document
@@ -135,5 +138,15 @@ export class CommentsComponent implements OnInit {
 
   approve() {
     this.submitter = 'approve';
+  }
+
+  canComment() {
+    if (this.user.role === 'user') return false;
+    else if (this.user.role !== this.step) return false;
+    else return true;
+  }
+
+  onCommentAdded() {
+    window.location.reload();
   }
 }

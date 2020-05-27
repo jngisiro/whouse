@@ -8,14 +8,14 @@
     <li (click)="onTab('all')">
       <a [ngClass]="{ active: tab === 'all' }">All</a>
     </li>
-    <li (click)="onTab('submitted')">
-      <a [ngClass]="{ active: tab === 'submitted' }">Submitted</a>
+    <li (click)="onTab('pending')">
+      <a [ngClass]="{ active: tab === 'pending' }">Pending</a>
     </li>
     <li (click)="onTab('rejected')">
       <a [ngClass]="{ active: tab === 'rejected' }">Rejections from Finance</a>
     </li>
     <li (click)="onTab('approved')">
-      <a [ngClass]="{ active: tab === 'approved' }">Approved</a>
+      <a [ngClass]="{ active: tab === 'approved' }">Approvals for Payment</a>
     </li>
   </ul>
 

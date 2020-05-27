@@ -43,16 +43,20 @@ export class UserComponent implements OnInit {
 
   onTab(tab: string) {
     switch (tab) {
-      case 'submitted':
+      case 'pending':
         this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step !== 'finance';
+          return (
+            (transaction.step === 'finance' && !transaction.rejected) ||
+            (transaction.step === 'manager' && !transaction.rejected) ||
+            (transaction.step === 'accounts' && !transaction.rejected)
+          );
         });
-        this.tab = 'submitted';
+        this.tab = 'pending';
         break;
 
       case 'rejected':
         this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'finance';
+          return transaction.step === 'submitted';
         });
         this.tab = 'rejected';
         break;

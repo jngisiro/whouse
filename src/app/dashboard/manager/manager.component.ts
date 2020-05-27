@@ -35,9 +35,10 @@ export class ManagerComponent implements OnInit {
     });
     this.currentdate = Date.now();
 
-    this.ds.getAllTransaction('manager').subscribe((transactions: any) => {
+    this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions.data.transactions;
       this.transactionCopy = transactions.data.transactions;
+      this.onTab('all');
       this.loading = false;
       if (transactions) this.empty = false;
     });
@@ -55,15 +56,31 @@ export class ManagerComponent implements OnInit {
         });
         this.tab = 'rejected';
         break;
+
+      case 'rejections':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step === 'manager' && transaction.rejected;
+        });
+        this.tab = 'rejections';
+        break;
+
       case 'all':
-        this.transactions = this.transactionCopy;
+        this.transactions = this.transactionCopy.filter((transactions) => {
+          return (
+            transactions.step === 'manager' ||
+            transactions.step === 'accounts' ||
+            (transactions.step === 'finance' && transactions.rejected)
+          );
+        });
         this.tab = 'all';
         break;
 
       case 'approved':
+        console.log(this.transactions);
         this.transactions = this.transactionCopy.filter((transaction) => {
-          transaction.step === 'accounts';
+          return transaction.step === 'accounts';
         });
+        console.log(this.transactions);
         this.tab = 'approved';
         break;
 

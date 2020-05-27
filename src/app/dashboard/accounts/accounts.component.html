@@ -13,11 +13,11 @@
     <li (click)="onTab('pending')">
       <a [ngClass]="{ active: tab === 'pending' }">Pending</a>
     </li>
-    <li (click)="onTab('approved')">
-      <a [ngClass]="{ active: tab === 'approved' }">Approved</a>
-    </li>
     <li (click)="onTab('rejected')">
       <a [ngClass]="{ active: tab === 'rejected' }">Rejected</a>
+    </li>
+    <li (click)="onTab('approved')">
+      <a [ngClass]="{ active: tab === 'approved' }">Approved</a>
     </li>
   </ul>
 

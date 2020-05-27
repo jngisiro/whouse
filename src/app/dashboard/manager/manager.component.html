@@ -15,10 +15,13 @@
       <a [ngClass]="{ active: tab === 'pending' }">Pending</a>
     </li>
     <li (click)="onTab('rejected')">
-      <a [ngClass]="{ active: tab === 'rejected' }">Rejected</a>
+      <a [ngClass]="{ active: tab === 'rejected' }">Manager Rejections</a>
+    </li>
+    <li (click)="onTab('rejections')">
+      <a [ngClass]="{ active: tab === 'rejections' }">Accounts Rejections</a>
     </li>
     <li (click)="onTab('approved')">
-      <a [ngClass]="{ active: tab === 'approved' }">Approved</a>
+      <a [ngClass]="{ active: tab === 'approved' }">Approvals</a>
     </li>
   </ul>
 

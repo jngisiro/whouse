@@ -2,19 +2,26 @@
   <div class="greeting">
     <h1>Hi, {{ user.firstname }}</h1>
     <p>
-      These are the records that have been forwarded from the Area Manager as of
+      Finance: These are the records that have been forwarded from the Suppy
+      Chain as of
       {{ currentdate | date }}
     </p>
   </div>
   <ul class="tabs head">
-    <li (click)="onTab('all')"><a 
-      [ngClass]="{ active: tab === 'all' }">All</a></li>
-    <li (click)="onTab('pending')"><a 
-      [ngClass]="{ active: tab === 'pending' }">Pending</a></li>
-    <li (click)="onTab('rejected')"><a 
-      [ngClass]="{ active: tab === 'rejected' }">Rejected</a></li>
+    <li (click)="onTab('all')">
+      <a [ngClass]="{ active: tab === 'all' }">All</a>
+    </li>
+    <li (click)="onTab('pending')">
+      <a [ngClass]="{ active: tab === 'pending' }">Pending</a>
+    </li>
+    <li (click)="onTab('rejected')">
+      <a [ngClass]="{ active: tab === 'rejected' }">Finance Rejections</a>
+    </li>
+    <li (click)="onTab('rejections')">
+      <a [ngClass]="{ active: tab === 'rejections' }">Manager Rejections</a>
+    </li>
     <li (click)="onTab('approved')">
-      <a [ngClass]="{ active: tab === 'approved' }">Approved</a>
+      <a [ngClass]="{ active: tab === 'approved' }">Approvals</a>
     </li>
   </ul>
 

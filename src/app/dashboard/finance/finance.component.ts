@@ -34,7 +34,7 @@ export class FinanceComponent implements OnInit {
     });
     this.currentdate = Date.now();
 
-    this.ds.getAllTransaction('finance').subscribe((transactions: any) => {
+    this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions.data.transactions;
       this.transactionCopy = transactions.data.transactions;
       this.loading = false;
@@ -50,25 +50,44 @@ export class FinanceComponent implements OnInit {
     switch (tab) {
       case 'rejected':
         this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'submitted';
+          return transaction.step === 'submitted' && transaction.rejected;
         });
         this.tab = 'rejected';
         break;
+
+      case 'rejections':
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return transaction.step === 'finance' && transaction.rejected;
+        });
+        this.tab = 'rejections';
+        break;
+
       case 'all':
-        this.transactions = this.transactionCopy;
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return (
+            transaction.step === 'finance' ||
+            'manager' ||
+            'approved' ||
+            'accounts'
+          );
+        });
         this.tab = 'all';
         break;
 
       case 'approved':
         this.transactions = this.transactionCopy.filter((transaction) => {
-          transaction.step === 'manager' || transaction.step === 'finance';
+          return (
+            transaction.step === 'manager' ||
+            transaction.step === 'accounts' ||
+            transaction.step === 'approved'
+          );
         });
         this.tab = 'approved';
         break;
 
       case 'pending':
         this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'finance';
+          return transaction.step === 'finance' && !transaction.rejected;
         });
         this.tab = 'pending';
         break;

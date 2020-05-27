@@ -28,11 +28,22 @@ export class DataService {
     });
   }
 
-  step(id, step) {
+  stepUp(id, step) {
     return this.http.patch(
       `https://w-house.herokuapp.com/api/v1/transactions/${id}`,
       {
         step,
+        rejected: false,
+      }
+    );
+  }
+
+  stepDown(id, step) {
+    return this.http.patch(
+      `https://w-house.herokuapp.com/api/v1/transactions/${id}`,
+      {
+        step,
+        rejected: true,
       }
     );
   }

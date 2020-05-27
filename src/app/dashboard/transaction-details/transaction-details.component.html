@@ -35,7 +35,10 @@
     </div>
   </div>
 
-  <app-comments [comments]="transaction?.comments"></app-comments>
+  <app-comments
+    [comments]="transaction?.comments"
+    [step]="transaction.step"
+  ></app-comments>
 
   <div *ngIf="error">
     <h3>There was an error loading the transaction</h3>

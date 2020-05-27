@@ -35,9 +35,10 @@ export class AccountsComponent implements OnInit {
     });
     this.currentdate = Date.now();
 
-    this.ds.getAllTransaction('accounts').subscribe((transactions: any) => {
+    this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions.data.transactions;
       this.transactionCopy = transactions.data.transactions;
+      this.onTab('all');
       this.loading = false;
       if (transactions) this.empty = false;
     });
@@ -51,14 +52,19 @@ export class AccountsComponent implements OnInit {
     switch (tab) {
       case 'rejected':
         this.transactions = this.transactionCopy.filter((transaction) => {
-          return (
-            transaction.step === 'manager' || transaction.step === 'finance'
-          );
+          return transaction.step === 'manager' && transaction.rejected;
         });
         this.tab = 'rejected';
         break;
+
       case 'all':
-        this.transactions = this.transactionCopy;
+        this.transactions = this.transactionCopy.filter((transaction) => {
+          return (
+            transaction.step === 'accounts' ||
+            transaction.step === 'manager' ||
+            transaction.step === 'approved'
+          );
+        });
         this.tab = 'all';
         break;
 

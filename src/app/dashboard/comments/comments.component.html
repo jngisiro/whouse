@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="!loading" class="comment__add">
+  <div *ngIf="canComment() && !loading" class="comment__add">
     <form class="form" (ngSubmit)="onComment(form)" #form="ngForm">
       <textarea
         ngModel
@@ -23,16 +23,22 @@
         rows="5"
         placeholder="Leave a comment . . ."
       ></textarea>
-      
+
       <button
         (click)="approve()"
-        class="submit right" 
-        *ngIf="!loading" [disabled]="form.invalid">
+        class="submit right"
+        *ngIf="!loading"
+        [disabled]="form.invalid"
+      >
         Approve
       </button>
 
-      <button (click)="reject()"
-        class="submit left" *ngIf="!loading" [disabled]="form.invalid">
+      <button
+        (click)="reject()"
+        class="submit left"
+        *ngIf="!loading"
+        [disabled]="form.invalid"
+      >
         Reject
       </button>
     </form>
