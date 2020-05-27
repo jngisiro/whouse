@@ -1,5 +1,6 @@
 export interface Transaction {
   _id?: string;
+  id?: string;
   deliveryDate: Date;
   userid: string;
   payload: string[];

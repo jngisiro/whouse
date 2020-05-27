@@ -44,7 +44,9 @@
           <span class="flag-icon flag-icon-gb"></span>
           {{ transaction.deliveryDate | date }}
         </div>
-        <div class="flex-row" role="cell">{{ transaction._id }}</div>
+        <div class="flex-row" role="cell">
+          {{ transaction.id || transaction._id }}
+        </div>
         <div class="flex-row" role="cell">
           {{ transaction.paymentVoucherNumber }}
         </div>
