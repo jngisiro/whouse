@@ -26,7 +26,6 @@ export class TransactionDetailsComponent implements OnInit {
       this.ds.getTransactionById(params['id']).subscribe(
         (response: any) => {
           this.transaction = response.data.transaction;
-          console.log(this.transaction.comments[0]);
           this.loading = false;
         },
         (err) => {

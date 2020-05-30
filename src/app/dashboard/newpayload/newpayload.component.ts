@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class NewpayloadComponent implements OnInit {
   loading: boolean = false;
+  amountCalculated = 0;
 
   constructor(private ds: DataService, private router: Router) {}
 
@@ -17,7 +18,8 @@ export class NewpayloadComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     this.loading = true;
-    form.value.payload = form.value.payload.split('\n');
+    form.value.amountToBePaid = this.amountCalculated
+    console.log(form.value);
 
     this.ds.createTransaction(form.value).subscribe(
       (response) => {
@@ -30,5 +32,8 @@ export class NewpayloadComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+  calculateAmount(value, amount){
+    this.amountCalculated = amount.viewModel - ((value / 100) * amount.viewModel);
   }
 }

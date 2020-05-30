@@ -14,17 +14,14 @@
     </label>
 
     <label for="payload">
-      Items to be housed
+      Description of Items
       <textarea
         ngModel
         #payload="ngModel"
         name="payload"
         required
         rows="10"
-        placeholder="Items One
-Item Two
-Item Three
-. . ."
+        placeholder="Describe the items"
       ></textarea>
     </label>
 
@@ -50,13 +47,34 @@ Item Three
       />
     </label>
 
+    <label for="invoiceAmount">
+      Invoice Amount
+      <input
+        type="number"
+        ngModel
+        #invoiceAmount="ngModel"
+        required
+        name="invoiceAmount"
+      />
+    </label>
+
+    <label for="tax">
+      SELECT WITHHOLDING TAX
+      <select name="tax" ngModel #tax="ngModel" required
+        (change)="calculateAmount($event.target.value, invoiceAmount)">
+        <option value="0">0%</option>
+        <option value="6">6%</option>
+      </select>
+    </label>
+
     <label for="amountToBePaid">
       Amount to be paid
       <input
         type="number"
+        placeholder = " {{ amountCalculated | currency: 'UGX ':'code' }}"
         ngModel
         #amountToBePaid="ngModel"
-        required
+        disabled
         name="amountToBePaid"
       />
     </label>
