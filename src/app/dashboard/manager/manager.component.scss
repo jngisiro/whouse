@@ -10,6 +10,18 @@
     color: #555;
   }
 
+  button {
+    background-color: #1976d2;
+    border: none;
+    padding: 10px 30px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    &:hover {
+      background-color: #1565c0;
+    }
+  }
+
   .head {
     background-color: #9ff5b9;
     li {

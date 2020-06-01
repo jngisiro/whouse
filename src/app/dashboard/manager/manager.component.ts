@@ -4,6 +4,9 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/models/transaction.model';
 import { DataService } from 'src/app/services/data.service';
+import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
+import * as XLSX from 'xlsx';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-manager',
@@ -17,11 +20,20 @@ export class ManagerComponent implements OnInit {
   transactions: Transaction[];
   transactionCopy: Transaction[];
   loading: boolean = false;
+  fileName = 'Excel-Report.xlsx';
   tab = 'all';
+  EXCEL_TYPE =
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  EXCEL_EXTENSION = '.xlsx';
+  report: any;
+
   constructor(
     private auth: AuthService,
     private router: Router,
-    private ds: DataService
+    private ds: DataService,
+    private formatDate: DatePipe,
+    private formatCurrency: CurrencyPipe,
+    private decimalPipe: DecimalPipe
   ) {}
 
   ngOnInit(): void {
@@ -94,5 +106,51 @@ export class ManagerComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  onGenerateReport() {
+    let report;
+    report = this.transactionCopy.map((el) => {
+      return {
+        deliveryDate: new Date(el.deliveryDate).toDateString(),
+        dateSubmitted: new Date(el.paymentRequisitionDate).toDateString(),
+        amountToBePaid: this.formatCurrency.transform(
+          el.amountToBePaid,
+          'UGX '
+        ),
+        trackingNumber: this.decimalPipe.transform(el.id, '3.0'),
+        invoiceAmount: this.formatCurrency.transform(el.invoiceAmount, 'UGX '),
+        description: el.payload,
+        activityLine: el.activityLine,
+        paymentVoucherNumber: el.paymentVoucherNumber,
+        projectCode: el.projectCode,
+        purchaseOrderNumber: el.purchaseOrderNumber,
+        withHoldingTax: el.withholdingTax + '%',
+        office:
+          el.step === 'submitted' || el.step === 'approved'
+            ? 'Supply Chain'
+            : el.step,
+        status: el.rejected ? 'rejected' : 'pending',
+      };
+    });
+
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(report);
+    const workbook: XLSX.WorkBook = {
+      Sheets: { data: worksheet },
+      SheetNames: ['data'],
+    };
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+    this.saveAsExcelFile(excelBuffer, this.fileName);
+  }
+
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], { type: this.EXCEL_TYPE });
+    FileSaver.saveAs(
+      data,
+      fileName + new Date().getTime() + this.EXCEL_EXTENSION
+    );
   }
 }

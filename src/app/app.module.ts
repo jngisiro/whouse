@@ -20,6 +20,8 @@ import { CommentsComponent } from './dashboard/comments/comments.component';
 import { AdminComponent } from './admin/admin.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EditPayloadComponent } from './dashboard/edit-payload/edit-payload.component';
+import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AdminComponent,
     ContactComponent,
     PageNotFoundComponent,
+    EditPayloadComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
+    DatePipe,
+    CurrencyPipe,
+    DecimalPipe,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],

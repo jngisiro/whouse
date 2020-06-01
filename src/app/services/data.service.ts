@@ -38,6 +38,17 @@ export class DataService {
     );
   }
 
+  updateTransaction(id, newTransaction) {
+    return this.http.patch(
+      `https://w-house.herokuapp.com/api/v1/transactions/${id}`,
+      {
+        ...newTransaction,
+        rejected: false,
+        step: 'finance',
+      }
+    );
+  }
+
   stepDown(id, step) {
     return this.http.patch(
       `https://w-house.herokuapp.com/api/v1/transactions/${id}`,

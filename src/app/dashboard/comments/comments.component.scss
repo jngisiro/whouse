@@ -57,6 +57,18 @@
     }
 
     .message {
+
+      h4{
+
+        .role{
+          font-weight: 500;
+          font-size: 16px;
+        }
+        span{
+          font-weight: 400;
+          font-size: 14px;
+        }
+      }
     }
   }
 

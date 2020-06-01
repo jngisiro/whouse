@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './dashboard/user/user.component';
 import { NewpayloadComponent } from './dashboard/newpayload/newpayload.component';
+import { EditPayloadComponent } from './dashboard/edit-payload/edit-payload.component';
 import { TransactionDetailsComponent } from './dashboard/transaction-details/transaction-details.component';
 import { AccountsComponent } from './dashboard/accounts/accounts.component';
 import { FinanceComponent } from './dashboard/finance/finance.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'manager', component: ManagerComponent },
   { path: 'admin', component: AdminComponent },
   { path: 'new', component: NewpayloadComponent },
+  { path: 'edit', component: EditPayloadComponent },
   { path: 'transaction/:id', component: TransactionDetailsComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'error', component: PageNotFoundComponent },
