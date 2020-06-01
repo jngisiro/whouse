@@ -112,25 +112,28 @@ export class ManagerComponent implements OnInit {
     let report;
     report = this.transactionCopy.map((el) => {
       return {
-        deliveryDate: new Date(el.deliveryDate).toDateString(),
-        dateSubmitted: new Date(el.paymentRequisitionDate).toDateString(),
-        amountToBePaid: this.formatCurrency.transform(
+        'Delivery Date': new Date(el.deliveryDate).toDateString(),
+        'Date Submitted': new Date(el.paymentRequisitionDate).toDateString(),
+        'Amount To Be Paid': this.formatCurrency.transform(
           el.amountToBePaid,
           'UGX '
         ),
-        trackingNumber: this.decimalPipe.transform(el.id, '3.0'),
-        invoiceAmount: this.formatCurrency.transform(el.invoiceAmount, 'UGX '),
-        description: el.payload,
-        activityLine: el.activityLine,
-        paymentVoucherNumber: el.paymentVoucherNumber,
-        projectCode: el.projectCode,
-        purchaseOrderNumber: el.purchaseOrderNumber,
-        withHoldingTax: el.withholdingTax + '%',
-        office:
+        'Tracking Number': this.decimalPipe.transform(el.id, '3.0'),
+        'Invoice Amount': this.formatCurrency.transform(
+          el.invoiceAmount,
+          'UGX '
+        ),
+        Description: el.payload,
+        'Activity Line': el.activityLine,
+        'Payment Voucher Number': el.paymentVoucherNumber,
+        'Project Code': el.projectCode,
+        'Purchase Order Number': el.purchaseOrderNumber,
+        'Withholding Tax': el.withholdingTax + '%',
+        Office:
           el.step === 'submitted' || el.step === 'approved'
             ? 'Supply Chain'
             : el.step,
-        status: el.rejected ? 'rejected' : 'pending',
+        Status: el.rejected ? 'rejected' : 'pending',
       };
     });
 

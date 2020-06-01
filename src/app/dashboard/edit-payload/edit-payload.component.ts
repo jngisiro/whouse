@@ -44,10 +44,17 @@ export class EditPayloadComponent implements OnInit {
     form.value.deliveryDate = this.newDeliveryDate;
     console.log(form.value);
     this.ds.updateTransaction(this.transaction._id, form.value).subscribe(
-      (response) => {
-        console.log(response);
+      (response: any) => {
+        if (form.value.comment) {
+          this.ds
+            .addComment(response.data.transaction._id, form.value.comment)
+            .subscribe((response) => {
+              console.log(response);
+              this.loading = false;
+              this.router.navigate(['transaction', this.transaction._id]);
+            });
+        }
         this.loading = false;
-        this.router.navigate(['transaction', this.transaction._id]);
       },
       (err) => {
         console.log(err);

@@ -1,4 +1,4 @@
-<app-loading *ngIf="loadingData" ></app-loading>
+<app-loading *ngIf="loadingData"></app-loading>
 <section *ngIf="!loadingData" class="newpayload">
   <h1>Edit the requested info and submit</h1>
 
@@ -7,7 +7,7 @@
       Delivary Date
       <input
         type="date"
-        [ngModel]="transaction.deliveryDate | date:'yyyy-MM-dd'"
+        [ngModel]="transaction.deliveryDate | date: 'yyyy-MM-dd'"
         (ngModelChange)="newDeliveryDate = $event"
         #deliveryDate="ngModel"
         required
@@ -62,9 +62,13 @@
 
     <label for="tax">
       SELECT WITHHOLDING TAX
-      <select name="tax" [(ngModel)]="transaction.withholdingTax"
-      #tax="ngModel" required
-        (change)="calculateAmount($event.target.value, invoiceAmount)">
+      <select
+        name="tax"
+        [(ngModel)]="transaction.withholdingTax"
+        #tax="ngModel"
+        required
+        (change)="calculateAmount($event.target.value, invoiceAmount)"
+      >
         <option value="0">0%</option>
         <option value="6">6%</option>
       </select>
@@ -102,6 +106,18 @@
         required
         name="activityLine"
       />
+    </label>
+
+    <label for="comment">
+      Comment
+      <textarea
+        ngModel
+        #comment="ngModel"
+        name="comment"
+        required
+        rows="10"
+        placeholder="Additional Comments"
+      ></textarea>
     </label>
 
     <button *ngIf="!loading" [disabled]="form.invalid">Submit Updates</button>

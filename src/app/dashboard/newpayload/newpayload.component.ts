@@ -28,10 +28,19 @@ export class NewpayloadComponent implements OnInit {
     console.log(form.value);
 
     this.ds.createTransaction(form.value).subscribe(
-      (response) => {
-        console.log(response);
-        this.loading = false;
+      (response: any) => {
         this.router.navigate(['/user']);
+
+        if (form.value.comment) {
+          this.ds
+            .addComment(response.data.transaction._id, form.value.comment)
+            .subscribe((response) => {
+              console.log(response);
+              this.loading = false;
+            });
+        }
+
+        this.loading = false;
       },
       (err) => {
         console.log(err);

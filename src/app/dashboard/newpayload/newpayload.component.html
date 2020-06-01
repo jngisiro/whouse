@@ -48,10 +48,10 @@
     </label>
 
     <label for="invoiceAmount">
-      Invoice Amount {{ invoiceAmounti }}
+      Invoice Amount
       <input
         type="number"
-        ngModel
+        [(ngModel)]="invoiceAmounti"
         #invoiceAmount="ngModel"
         required
         name="invoiceAmount"
@@ -104,6 +104,18 @@
         required
         name="activityLine"
       />
+    </label>
+
+    <label for="comment">
+      Comment
+      <textarea
+        ngModel
+        #comment="ngModel"
+        name="comment"
+        required
+        rows="10"
+        placeholder="Additional Comments"
+      ></textarea>
     </label>
 
     <button *ngIf="!loading" [disabled]="form.invalid">Submit</button>
