@@ -8,6 +8,8 @@ export interface Transaction {
   purchaseOrderNumber: number;
   projectCode: string;
   activityLine: string;
+  invoiceAmount?: number;
+  withholdingTax?: number;
   description: string;
   amountToBePaid?: number;
   paymentRequisitionDate: Date;
