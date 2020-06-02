@@ -21,6 +21,7 @@
     "@angular/router": "~9.1.7",
     "alasql": "^0.6.2",
     "file-saver": "^2.0.2",
+    "moment": "^2.26.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "xlsx": "^0.16.1",
