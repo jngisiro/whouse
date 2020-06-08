@@ -14,3 +14,69 @@ body {
   border-bottom: 3px solid #000;
   font-weight: 500;
 }
+
+.table-container {
+  margin: 40px;
+  border: 1px solid #aaa;
+  .table {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    text-align: center;
+
+    &.header {
+      background-color: #1976d2;
+      color: #fff;
+      padding: 15px 5px;
+    }
+
+    &.body {
+      padding: 15px 5px;
+      cursor: pointer;
+      transition: ease-out;
+
+      &:nth-child(odd) {
+        background-color: #ddd;
+      }
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.inline-form {
+  display: flex;
+  flex-flow: row;
+  padding: 0 10%;
+  margin-top: 20px;
+
+  input {
+    flex-grow: 4;
+    font-size: 16px;
+    padding: 10px 10px;
+    border: 1px solid grey;
+  }
+
+  button {
+    flex-grow: 1;
+    font-size: 15px;
+    background-color: #1565c0;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: 0.6 ease-out;
+
+    &:hover {
+      background: #1e5594;
+    }
+  }
+}
+
+.red {
+  background-color: rgba(255, 0, 0, 0.199);
+}
+
+.green {
+  background-color: green;
+}

@@ -22,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditPayloadComponent } from './dashboard/edit-payload/edit-payload.component';
 import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
     ContactComponent,
     PageNotFoundComponent,
     EditPayloadComponent,
+    SearchBarComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
