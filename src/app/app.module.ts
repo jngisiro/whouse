@@ -23,6 +23,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EditPayloadComponent } from './dashboard/edit-payload/edit-payload.component';
 import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     EditPayloadComponent,
     SearchBarComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, BrowserAnimationsModule],
   providers: [
     DatePipe,
     CurrencyPipe,
