@@ -22,7 +22,11 @@
   </ul>
 
   <form class="inline-form">
-    <input type="search" placeholder="Tracking number" (input)="onSearch()" />
+    <input
+      type="search"
+      placeholder="Tracking number"
+      (input)="onSearch($event)"
+    />
     <button type="submit">Search</button>
   </form>
 

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/models/transaction.model';
 import { DataService } from 'src/app/services/data.service';
+import { duration } from 'moment';
 
 @Component({
   selector: 'app-user',
@@ -99,5 +100,12 @@ export class UserComponent implements OnInit {
     } else {
       this.transactions = this.transactionCopy;
     }
+  }
+
+  getTimeDifference(date) {
+    const deliveryDate = new Date(date).getTime();
+    const today = new Date().getTime();
+
+    return duration(today - deliveryDate).days();
   }
 }

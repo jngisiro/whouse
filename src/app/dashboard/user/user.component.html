@@ -21,7 +21,11 @@
   </ul>
 
   <form class="inline-form">
-    <input type="search" placeholder="Tracking number" (input)="onSearch()" />
+    <input
+      type="search"
+      placeholder="Tracking number"
+      (input)="onSearch($event)"
+    />
     <button type="submit">Search</button>
   </form>
 
@@ -44,6 +48,15 @@
         *ngFor="let transaction of transactions"
         class="table body"
         role="rowgroup"
+        [ngClass]="{
+          red:
+            getTimeDifference(transaction.deliveryDate) > 5 &&
+            transaction.step !== 'approved',
+          green:
+            getTimeDifference(transaction.deliveryDate) > 2 &&
+            getTimeDifference(transaction.deliveryDate) < 5 &&
+            transaction.step !== 'approved'
+        }"
         (click)="onSelect(transaction._id)"
       >
         <div class="flex-row first" role="cell">
