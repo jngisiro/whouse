@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { duration } from 'moment';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, AfterContentInit {
   user: User;
   empty: boolean = true;
   currentdate;
@@ -107,5 +107,9 @@ export class UserComponent implements OnInit {
     const today = new Date().getTime();
 
     return duration(today - deliveryDate).days();
+  }
+
+  ngAfterContentInit() {
+    console.log('done');
   }
 }
