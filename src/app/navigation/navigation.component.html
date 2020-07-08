@@ -1,11 +1,21 @@
 <nav class="navigation">
-  <a routerLink="/">TRACK SOL</a>
+  <div class="logo">
+    <mat-icon>home</mat-icon><a routerLink="/">TRACK SOL</a>
+  </div>
 
   <ul>
-    <li><a routerLink="/contact">Contact Admin</a></li>
-    <li *ngIf="user">
-      <a routerLink="/">{{ user.firstname }} {{ user.lastname }}</a>
+    <li>
+      <mat-icon>send</mat-icon> <a routerLink="/contact">Contact Admin</a>
     </li>
-    <li *ngIf="user"><a routerLink="/" (click)="onLogout()">Logout</a></li>
+    <li>
+      <a [matMenuTriggerFor]="currency">
+        <mat-icon>account_circle</mat-icon>
+        {{ user.firstname }}
+        <mat-icon class="icon">keyboard_arrow_down</mat-icon>
+      </a>
+      <mat-menu #currency="matMenu">
+        <button mat-menu-item (click)="onLogout()">Logout</button>
+      </mat-menu>
+    </li>
   </ul>
 </nav>

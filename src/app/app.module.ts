@@ -24,9 +24,7 @@ import { EditPayloadComponent } from './dashboard/edit-payload/edit-payload.comp
 import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -55,9 +53,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatDialogModule,
+    MaterialModule,
   ],
   providers: [
     DatePipe,

@@ -10,7 +10,6 @@
     font-size: 15px;
     text-shadow: 0 0 5px #000;
     text-decoration: none;
-    margin: 0 20px;
   }
 
   ul {
@@ -20,5 +19,35 @@
     flex-flow: row;
     list-style: none;
     justify-content: space-between;
+
+    li a {
+      display: flex;
+      align-items: center;
+    }
+
+    li {
+      display: flex;
+      margin: 0 20px;
+      flex-flow: row;
+      align-items: center;
+      cursor: pointer;
+
+      mat-icon {
+        color: #fff;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+.logo {
+  display: flex;
+  flex-flow: row;
+  color: #fff;
+  margin-left: 20px;
+  align-items: center;
+
+  a {
+    margin-left: 10px;
   }
 }

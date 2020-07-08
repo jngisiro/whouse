@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { duration } from 'moment';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent implements OnInit, AfterContentInit {
+export class UserComponent implements OnInit {
   user: User;
   empty: boolean = true;
   currentdate;
@@ -86,19 +86,16 @@ export class UserComponent implements OnInit, AfterContentInit {
 
   onSearch($event) {
     let val: string = (event.target as any).value;
-    let regx = new RegExp(val);
+    const currentTransactions = this.transactions;
     if (val) {
-      if (val.startsWith('0')) {
+      if (val.startsWith('0') || val.startsWith('00')) {
         val = val.substr(1, val.length);
-      } else if (val.startsWith('00')) {
-        console.log(val);
-        val = val.substr(2, val.length);
       }
-      this.transactions = this.transactionCopy.filter((transaction) => {
+      this.transactions = currentTransactions.filter((transaction) => {
         return transaction.id.toString().indexOf(val) !== -1;
       });
     } else {
-      this.transactions = this.transactionCopy;
+      this.transactions = currentTransactions;
     }
   }
 
@@ -107,9 +104,5 @@ export class UserComponent implements OnInit, AfterContentInit {
     const today = new Date().getTime();
 
     return duration(today - deliveryDate).days();
-  }
-
-  ngAfterContentInit() {
-    console.log('done');
   }
 }

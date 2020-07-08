@@ -1,6 +1,7 @@
 .details {
   width: 70vw;
   margin: 20px auto;
+  background-color: #fff;
 
   h1 {
     font-size: 40px;
@@ -22,6 +23,28 @@
     padding: 20px;
     box-shadow: 0 0 2px grey;
     border-radius: 5px;
+
+    position: relative;
+
+    .title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .verified {
+      position: absolute;
+      bottom: 30px;
+      right: 70px;
+      color: rgba(49, 172, 255, 0.8);
+
+      mat-icon {
+        font-size: 70px;
+      }
+
+      p {
+        font-size: 20px;
+      }
+    }
   }
 
   .timeElapsed {

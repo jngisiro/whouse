@@ -7,36 +7,77 @@
     Date Submitted: {{ transaction?.paymentRequisitionDate | date }}
   </h3>
   <div *ngIf="!loading && !error" class="info">
-    <div>
-      <h3>Delivery Date</h3>
-      <p>{{ transaction.deliveryDate | date }}</p>
-
-      <h3>Payload Items</h3>
-      <p>{{ transaction.payload }}</p>
-
-      <h3>Payment Voucher Number</h3>
-      <p>{{ transaction.paymentVoucherNumber }}</p>
-
-      <h3>Invoice Amount</h3>
-      <p>{{ transaction.invoiceAmount | currency: "UGX ":"code" }}</p>
-
-      <h3>Withholding Tax</h3>
-      <p>{{ transaction.withholdingTax }}%</p>
+    <div *ngIf="transaction.step === 'approved'" class="verified">
+      <mat-icon>verified</mat-icon>
+      <p>Approved</p>
     </div>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>today</mat-icon>
+        <div mat-line class="title">Delivery Date</div>
+        <div mat-line>{{ transaction.deliveryDate | date }}</div>
+      </mat-list-item>
 
-    <div>
-      <h3>Purchase Order Number</h3>
-      <p>{{ transaction.purchaseOrderNumber }}</p>
+      <mat-list-item>
+        <mat-icon mat-list-icon>assignment</mat-icon>
+        <div mat-line class="title">Payload Items</div>
+        <div mat-line>{{ transaction.payload }}</div>
+      </mat-list-item>
 
-      <h3>Project Code</h3>
-      <p>{{ transaction.projectCode }}</p>
+      <mat-list-item>
+        <mat-icon mat-list-icon>filter_4</mat-icon>
+        <div mat-line class="title">Payment Voucher Number</div>
+        <div mat-line>{{ transaction.paymentVoucherNumber }}</div>
+      </mat-list-item>
 
-      <h3>Activity Line</h3>
-      <p>{{ transaction.activityLine }}</p>
+      <mat-list-item>
+        <mat-icon mat-list-icon>local_atm</mat-icon>
+        <div mat-line class="title">Invoice Amount</div>
+        <div mat-line>
+          {{ transaction.invoiceAmount | currency: "UGX ":"code" }}
+        </div>
+      </mat-list-item>
 
-      <h3>Amount to be paid</h3>
-      <p>{{ transaction.amountToBePaid | currency: "UGX ":"code" }}</p>
-    </div>
+      <mat-list-item>
+        <mat-icon mat-list-icon>multiple_stop</mat-icon>
+        <div mat-line class="title">Withholding Tax</div>
+        <div mat-line>{{ transaction.withholdingTax }}%</div>
+      </mat-list-item>
+    </mat-list>
+
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>style</mat-icon>
+        <div mat-line class="title">Purchase Order Number</div>
+        <div mat-line>
+          {{ transaction.purchaseOrderNumber }}
+        </div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon mat-list-icon>confirmation_number</mat-icon>
+        <div mat-line class="title">Project Code</div>
+        <div mat-line>
+          {{ transaction.projectCode }}
+        </div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon mat-list-icon>money</mat-icon>
+        <div mat-line class="title">Activity Line</div>
+        <div mat-line>
+          {{ transaction.activityLine }}
+        </div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon mat-list-icon>attach_money</mat-icon>
+        <div mat-line class="title">Amount to be paid</div>
+        <div mat-line>
+          {{ transaction.amountToBePaid | currency: "UGX ":"code" }}
+        </div>
+      </mat-list-item>
+    </mat-list>
   </div>
 
   <h3 style="float: right;" class="timeElapsed" *ngIf="!loading && !error">
