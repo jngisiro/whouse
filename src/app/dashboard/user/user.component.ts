@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/models/transaction.model';
 import { DataService } from 'src/app/services/data.service';
 import { duration } from 'moment';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -12,13 +16,12 @@ import { duration } from 'moment';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
+  trans;
   user: User;
-  empty: boolean = true;
   currentdate;
   transactions: Transaction[];
-  transactionCopy: Transaction[];
   loading: boolean = false;
-  tab = 'all';
+  ELEMENT_DATA: Transaction[];
 
   constructor(
     private auth: AuthService,
@@ -27,61 +30,15 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loading = true;
     this.auth.user.subscribe((user) => {
       if (user && user.role === 'user') this.user = user;
       else this.router.navigate(['/']);
     });
     this.currentdate = Date.now();
 
-    this.ds.getAllTransaction(null).subscribe((transactions: any) => {
-      this.transactions = transactions.data.transactions;
-      console.log(this.transactions);
-      this.transactionCopy = transactions.data.transactions;
-      this.loading = false;
-      if (transactions) this.empty = false;
+    this.ds.getAllTransaction(null).subscribe((transactions) => {
+      this.trans = transactions;
     });
-  }
-
-  onTab(tab: string) {
-    switch (tab) {
-      case 'pending':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return (
-            (transaction.step === 'finance' && !transaction.rejected) ||
-            (transaction.step === 'manager' && !transaction.rejected) ||
-            (transaction.step === 'accounts' && !transaction.rejected)
-          );
-        });
-        this.tab = 'pending';
-        break;
-
-      case 'rejected':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'submitted';
-        });
-        this.tab = 'rejected';
-        break;
-
-      case 'all':
-        this.transactions = this.transactionCopy;
-        this.tab = 'all';
-        break;
-
-      case 'approved':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'approved';
-        });
-        this.tab = 'approved';
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  onSelect(id) {
-    this.router.navigate(['/transaction', id]);
   }
 
   onSearch($event) {
@@ -104,5 +61,9 @@ export class UserComponent implements OnInit {
     const today = new Date().getTime();
 
     return duration(today - deliveryDate).days();
+  }
+
+  onCreate() {
+    this.router.navigate(['/new']);
   }
 }

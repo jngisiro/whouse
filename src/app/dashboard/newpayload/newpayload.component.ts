@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-newpayload',
@@ -12,19 +14,26 @@ import { CurrencyPipe } from '@angular/common';
 export class NewpayloadComponent implements OnInit {
   loading: boolean = false;
   amountCalculated = 0;
-  invoiceAmounti: any = 0;
+  user: User;
 
   constructor(
     private ds: DataService,
     private router: Router,
+    private auth: AuthService,
     private currency: CurrencyPipe
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.auth.user.subscribe((user) => {
+      if (user && user.role === 'user') this.user = user;
+      else this.router.navigate(['/']);
+    });
+  }
 
   onSubmit(form: NgForm) {
     this.loading = true;
     form.value.amountToBePaid = this.amountCalculated;
+    form.value.submittedBy = `${this.user.firstname} ${this.user.lastname}`;
     console.log(form.value);
 
     this.ds.createTransaction(form.value).subscribe(
@@ -49,15 +58,7 @@ export class NewpayloadComponent implements OnInit {
     );
   }
   calculateAmount(value, amount) {
-    this.amountCalculated = amount.viewModel - (value / 100) * amount.viewModel;
-  }
-
-  onBlurInvoiceAmount() {
-    if (this.invoiceAmounti) {
-      this.invoiceAmounti = this.currency.transform(
-        this.invoiceAmounti,
-        'UGX '
-      );
-    }
+    this.amountCalculated =
+      amount.viewModel - (value.source.value / 100) * amount.viewModel;
   }
 }

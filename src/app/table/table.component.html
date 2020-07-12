@@ -1,0 +1,162 @@
+<mat-tab-group mat-align-tabs="end">
+  <mat-tab label="All">
+    <div>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="mat-elevation-z8"
+      >
+        <ng-container matColumnDef="deliveryDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Delivery Date
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.deliveryDate | date }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="paymentRequisitionDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Date Logged
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.paymentRequisitionDate | date }}
+          </td>
+        </ng-container>
+
+        <!-- Tracking Number -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Tracking No.
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.id | number: "3.0" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Location
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.location }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="payload">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Description of Items
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.payload }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="submittedBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Submitted By
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.submittedBy }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="SubmittedBy">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Submitted By
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.submittedBy }}
+          </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="amountToBePaid">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Amount to be paid
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.amountToBePaid | currency: "UGX ":"code" }}
+          </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="paymentVoucherNumber">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Payment Voucher No.
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.paymentVoucherNumber }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="projectCode">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Budjet Line
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.projectCode }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="supplierName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Supplier Name
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.supplierName }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Status
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.status }}
+          </td>
+        </ng-container>
+
+        <ng-component matColumnDef="loading">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            Loading Data . . .
+          </mat-footer-cell>
+        </ng-component>
+
+        <ng-component matColumnDef="noData">
+          <mat-footer-cell *matFooterCellDef colspan="6">
+            No transactions . . .
+          </mat-footer-cell>
+        </ng-component>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: displayedColumns"
+          (click)="onSelect(row)"
+        ></tr>
+
+        <mat-footer-row
+          *matFooterRowDef="['loading']"
+          [ngClass]="{ hide: dataSource != null }"
+        ></mat-footer-row>
+
+        <mat-footer-row
+          *matFooterRowDef="['noData']"
+          [ngClass]="{
+            hide: !(dataSource != null && ELEMENT_DATA?.length === 0)
+          }"
+        ></mat-footer-row>
+      </table>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 15, 20]"
+        [pageSize]="5"
+        showFirstLastButtons
+      ></mat-paginator>
+    </div>
+  </mat-tab>
+  <mat-tab label="Pending">Content 2</mat-tab>
+  <mat-tab label="Rejections From Finance">Content 3</mat-tab>
+  <mat-tab label="Approvals For Payment">Content 3</mat-tab>
+</mat-tab-group>

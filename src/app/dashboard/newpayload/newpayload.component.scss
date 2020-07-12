@@ -1,4 +1,5 @@
 .login-form {
+  background-color: #fff;
   h1 {
     font-weight: 100;
     font-size: 50px;
@@ -16,86 +17,16 @@
 }
 
 .newpayload {
-  width: 60vw;
+  width: 80vw;
   margin: 0 auto;
-
+  background-color: #fff;
+  padding: 40px;
   h1 {
     font-size: 40px;
     font-weight: 100;
+    padding-top: 20px;
     text-align: center;
   }
-}
 
-.form {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-evenly;
-  height: 100%;
-  width: 100%;
-
-  label {
-    margin-top: 20px;
-    display: flex;
-    flex-flow: column;
-  }
-
-  select{
-    height: 35px;
-    font-size: 18px;
-    margin-top: 5px; 
-  }
-
-  input {
-    height: 30px;
-  }
-
-  input,
-  textarea {
-    font-size: 16px;
-    padding: 2px 10px;
-    margin-top: 10px;
-    // border-radius: 3px;
-    // box-shadow: none;
-    // outline: none;
-    // border: 1px solid #707070;
-
-    &.ng-invalid {
-      &.ng-touched {
-        border: 1px solid red;
-      }
-    }
-  }
-
-  label {
-    color: #000;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 2px;
-
-    small {
-      color: red;
-      text-transform: none;
-      letter-spacing: normal;
-      font-size: 12px;
-      align-self: flex-end;
-    }
-  }
-
-  button {
-    background-color: #003561;
-    color: #fff;
-    border: none;
-    height: 32px;
-    font-size: 18px;
-    font-weight: 400;
-    cursor: pointer;
-    margin-top: 40px;
-    margin-bottom: 100px;
-
-    &[disabled] {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
+  margin-bottom: 100px;
 }

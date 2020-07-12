@@ -14,6 +14,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const material = [
   MatButtonModule,
@@ -31,6 +35,11 @@ const material = [
   MatMenuModule,
   MatIconModule,
   MatListModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatTabsModule,
+  MatNativeDateModule,
+  MatDatepickerModule,
 ];
 
 @NgModule({

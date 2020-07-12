@@ -25,6 +25,7 @@ import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MaterialModule } from './material/material.module';
     PageNotFoundComponent,
     EditPayloadComponent,
     SearchBarComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,

@@ -70,6 +70,6 @@ export class TransactionDetailsComponent implements OnInit {
     const hours = duration(difference).hours();
     const days = duration(difference).days();
 
-    return `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    return `${days} days ${hours} hours ${minutes} minutes`;
   }
 }

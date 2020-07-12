@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Transaction } from '../models/transaction.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,9 @@ export class DataService {
       url = `${url}?step=${step}`;
     }
 
-    return this.http.get(url);
+    return this.http
+      .get<Transaction[]>(url)
+      .pipe(map((transaction: any) => transaction.data.transactions));
   }
 
   getTransactionById(id) {

@@ -11,12 +11,9 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class FinanceComponent implements OnInit {
   user: User;
-  empty: boolean = true;
-  currentdate;
   transactions: Transaction[];
-  transactionCopy: Transaction[];
   loading: boolean = false;
-  tab = 'all';
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -32,13 +29,10 @@ export class FinanceComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
-    this.currentdate = Date.now();
 
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
-      this.transactions = transactions.data.transactions;
-      this.transactionCopy = transactions.data.transactions;
+      this.transactions = transactions;
       this.loading = false;
-      if (transactions) this.empty = false;
     });
   }
 
@@ -46,72 +40,5 @@ export class FinanceComponent implements OnInit {
     this.router.navigate(['/transaction', id]);
   }
 
-  onTab(tab: string) {
-    switch (tab) {
-      case 'rejected':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'submitted' && transaction.rejected;
-        });
-        this.tab = 'rejected';
-        break;
-
-      case 'rejections':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'finance' && transaction.rejected;
-        });
-        this.tab = 'rejections';
-        break;
-
-      case 'all':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return (
-            transaction.step === 'finance' ||
-            'manager' ||
-            'approved' ||
-            'accounts'
-          );
-        });
-        this.tab = 'all';
-        break;
-
-      case 'approved':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return (
-            transaction.step === 'manager' ||
-            transaction.step === 'accounts' ||
-            transaction.step === 'approved'
-          );
-        });
-        this.tab = 'approved';
-        break;
-
-      case 'pending':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'finance' && !transaction.rejected;
-        });
-        this.tab = 'pending';
-        break;
-
-      default:
-        break;
-    }
-  }
-
-  onSearch($event) {
-    let val: string = (event.target as any).value;
-    let regx = new RegExp(val);
-    if (val) {
-      if (val.startsWith('0')) {
-        val = val.substr(1, val.length);
-      } else if (val.startsWith('00')) {
-        console.log(val);
-        val = val.substr(2, val.length);
-      }
-      this.transactions = this.transactionCopy.filter((transaction) => {
-        return transaction.id.toString().indexOf(val) !== -1;
-      });
-    } else {
-      this.transactions = this.transactionCopy;
-    }
-  }
+  onSearch($event) {}
 }

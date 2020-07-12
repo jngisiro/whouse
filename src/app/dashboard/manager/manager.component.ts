@@ -48,64 +48,11 @@ export class ManagerComponent implements OnInit {
     this.currentdate = Date.now();
 
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
-      this.transactions = transactions.data.transactions;
-      this.transactionCopy = transactions.data.transactions;
-      this.onTab('all');
+      this.transactions = transactions;
+      this.transactionCopy = transactions;
       this.loading = false;
       if (transactions) this.empty = false;
     });
-  }
-
-  onSelect(id) {
-    this.router.navigate(['/transaction', id]);
-  }
-
-  onTab(tab: string) {
-    switch (tab) {
-      case 'rejected':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'finance' && transaction.rejected;
-        });
-        this.tab = 'rejected';
-        break;
-
-      case 'rejections':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'manager' && transaction.rejected;
-        });
-        this.tab = 'rejections';
-        break;
-
-      case 'all':
-        this.transactions = this.transactionCopy.filter((transactions) => {
-          return (
-            transactions.step === 'manager' ||
-            transactions.step === 'accounts' ||
-            (transactions.step === 'finance' && transactions.rejected)
-          );
-        });
-        this.tab = 'all';
-        break;
-
-      case 'approved':
-        console.log(this.transactions);
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'accounts';
-        });
-        console.log(this.transactions);
-        this.tab = 'approved';
-        break;
-
-      case 'pending':
-        this.transactions = this.transactionCopy.filter((transaction) => {
-          return transaction.step === 'manager';
-        });
-        this.tab = 'pending';
-        break;
-
-      default:
-        break;
-    }
   }
 
   onGenerateReport() {

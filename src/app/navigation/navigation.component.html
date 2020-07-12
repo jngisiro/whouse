@@ -7,7 +7,7 @@
     <li>
       <mat-icon>send</mat-icon> <a routerLink="/contact">Contact Admin</a>
     </li>
-    <li>
+    <li *ngIf="user">
       <a [matMenuTriggerFor]="currency">
         <mat-icon>account_circle</mat-icon>
         {{ user.firstname }}

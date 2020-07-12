@@ -19,37 +19,40 @@
       }
     }
   }
+}
 
-  .greeting {
-    text-align: center;
-    background-color: #c5cae9;
-    color: #000;
-    padding: 40px 0;
+table {
+  width: 100%;
+}
 
-    h1 {
-      font-size: 40px;
-      font-weight: 200;
-    }
+.search {
+  background-color: #fff;
+  padding-top: 40px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
 
-    p {
-      margin: 20px 0;
-      font-size: 18px;
-      font-weight: 200;
-    }
-
-    a {
-      color: #fff;
-      text-decoration: none;
-      background-color: #1976d2;
-      padding: 8px 30px;
-      // transition: 1s ease-out;
-      &:hover {
-        background-color: #1565c0;
-      }
-
-      &:active {
-        background-color: #1976d2;
-      }
-    }
+  button {
+    height: 40px;
+    margin-top: 10px;
   }
+}
+
+.search-form-field {
+  width: 60%;
+  border-radius: 5px;
+  margin-left: 30px;
+
+  input {
+    margin-left: 20px;
+    font-size: 16px;
+  }
+
+  div.mat-form-field-underline {
+    display: none;
+  }
+}
+
+mat-tab-group {
+  background-color: #fff;
 }

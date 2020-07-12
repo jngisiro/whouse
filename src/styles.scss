@@ -88,3 +88,23 @@ body {
   background: url(./assets/ab.jpg);
   background-size: cover;
 }
+
+.hide {
+  display: none;
+}
+
+mat-form-field {
+  // justify-content: stretch;
+  padding: 10px;
+  width: 100%;
+}
+
+.mat-row:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.mat-header-cell {
+  background-color: #ccc;
+  color: #000;
+}
