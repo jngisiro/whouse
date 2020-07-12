@@ -17,8 +17,12 @@ import { Observable } from 'rxjs';
 })
 export class UserComponent implements OnInit {
   trans;
+  pending;
+  approved;
+  rejected;
   user: User;
-  currentdate;
+  tabs = ['All', 'Pending', 'Rejections From Finance', 'Approvals For Payment'];
+
   transactions: Transaction[];
   loading: boolean = false;
   ELEMENT_DATA: Transaction[];
@@ -34,10 +38,27 @@ export class UserComponent implements OnInit {
       if (user && user.role === 'user') this.user = user;
       else this.router.navigate(['/']);
     });
-    this.currentdate = Date.now();
 
+    // All the transactions in the system
     this.ds.getAllTransaction(null).subscribe((transactions) => {
-      this.trans = transactions;
+      this.trans = transactions || [];
+
+      // Transactions that are still Open
+      this.pending = this.trans.filter((transaction) => {
+        return (
+          transaction.step !== 'submitted' && transaction.step !== 'approved'
+        );
+      });
+
+      // Rejected transactions
+      this.rejected = this.trans.filter(
+        (transaction) => transaction.step === 'submitted'
+      );
+
+      // Approved transactions
+      this.approved = this.trans.filter(
+        (transaction) => transaction.step === 'approved'
+      );
     });
   }
 

@@ -17,5 +17,11 @@
 </div>
 
 <div *ngIf="trans">
-  <app-table [data]="trans"></app-table>
+  <app-table
+    [data]="trans"
+    [approved]="approved"
+    [rejected]="rejected"
+    [pending]="pending"
+    [tabs]="tabs"
+  ></app-table>
 </div>

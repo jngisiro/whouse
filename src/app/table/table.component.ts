@@ -5,6 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-table',
@@ -13,6 +14,10 @@ import { DataService } from '../services/data.service';
 })
 export class TableComponent implements OnInit {
   @Input() data: Transaction[];
+  @Input() pending: Transaction[];
+  @Input() rejected: Transaction[];
+  @Input() approved: Transaction[];
+  @Input() tabs: string[];
 
   ELEMENT_DATA: Transaction[];
 
@@ -50,5 +55,24 @@ export class TableComponent implements OnInit {
 
   onSelect(row) {
     this.router.navigate(['/transaction', row._id]);
+  }
+
+  public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    switch (tabChangeEvent.index) {
+      case 0:
+        this.dataSource.data = this.data;
+        break;
+      case 1:
+        this.dataSource.data = this.pending;
+        break;
+      case 2:
+        this.dataSource.data = this.rejected;
+        break;
+      case 3:
+        this.dataSource.data = this.approved;
+        break;
+      default:
+        break;
+    }
   }
 }

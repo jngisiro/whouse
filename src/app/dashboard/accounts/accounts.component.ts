@@ -17,6 +17,13 @@ export class AccountsComponent implements OnInit {
   transactions: Transaction[];
   loading: boolean = false;
 
+  tabs = ['All', 'Pending', 'Accounts Rejections', 'Approvals from Accounts'];
+
+  trans;
+  pending;
+  approved;
+  rejected;
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -37,6 +44,27 @@ export class AccountsComponent implements OnInit {
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions;
       this.loading = false;
+
+      this.trans = this.transactions.filter((transaction) => {
+        return (
+          transaction.step === 'accounts' || transaction.step === 'approved'
+        );
+      });
+
+      // Transactions that are still Open
+      this.pending = this.transactions.filter((transaction) => {
+        return transaction.step === 'accounts';
+      });
+
+      // Rejected transactions
+      this.rejected = this.transactions.filter(
+        (transaction) => transaction.step === 'manager' && transaction.rejected
+      );
+
+      // Approved transactions
+      this.approved = this.transactions.filter(
+        (transaction) => transaction.step === 'approved'
+      );
     });
   }
 

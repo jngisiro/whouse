@@ -12,6 +12,17 @@ import { DataService } from 'src/app/services/data.service';
 export class FinanceComponent implements OnInit {
   user: User;
   transactions: Transaction[];
+  tabs = [
+    'All',
+    'Pending',
+    'Rejections from Area Manager',
+    'Finance Approvals',
+  ];
+
+  trans;
+  pending;
+  approved;
+  rejected;
   loading: boolean = false;
 
   constructor(
@@ -33,6 +44,33 @@ export class FinanceComponent implements OnInit {
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions;
       this.loading = false;
+
+      this.trans = this.transactions.filter((transaction) => {
+        return (
+          transaction.step === 'finance' ||
+          transaction.step === 'manager' ||
+          transaction.step === 'accounts' ||
+          transaction.step === 'approved'
+        );
+      });
+
+      // Transactions that are still Open
+      this.pending = this.transactions.filter((transaction) => {
+        return transaction.step === 'finance';
+      });
+
+      // Rejected transactions
+      this.rejected = this.transactions.filter(
+        (transaction) => transaction.step === 'finance' && transaction.rejected
+      );
+
+      // Approved transactions
+      this.approved = this.transactions.filter(
+        (transaction) =>
+          transaction.step === 'manager' ||
+          transaction.step === 'accounts' ||
+          transaction.step === 'approved'
+      );
     });
   }
 

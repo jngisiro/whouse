@@ -27,6 +27,17 @@ export class ManagerComponent implements OnInit {
   EXCEL_EXTENSION = '.xlsx';
   report: any;
 
+  trans;
+  pending;
+  approved;
+  rejected;
+  tabs = [
+    'All',
+    'Pending',
+    'Rejections from Accounts',
+    'Area Manager Approvals',
+  ];
+
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -52,6 +63,32 @@ export class ManagerComponent implements OnInit {
       this.transactionCopy = transactions;
       this.loading = false;
       if (transactions) this.empty = false;
+
+      // All Transactions
+      this.trans = this.transactions.filter((transaction) => {
+        return (
+          transaction.step === 'manager' ||
+          transaction.step === 'accounts' ||
+          transaction.step === 'approved' ||
+          (transaction.step === 'finance' && transaction.rejected)
+        );
+      });
+
+      // Transactions that are still Open
+      this.pending = this.transactions.filter((transaction) => {
+        return transaction.step === 'manager';
+      });
+
+      // Rejected transactions
+      this.rejected = this.transactions.filter(
+        (transaction) => transaction.step === 'manager' && transaction.rejected
+      );
+
+      // Approved transactions
+      this.approved = this.transactions.filter(
+        (transaction) =>
+          transaction.step === 'accounts' || transaction.step === 'approved'
+      );
     });
   }
 

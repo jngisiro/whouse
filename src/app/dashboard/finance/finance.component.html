@@ -14,5 +14,11 @@
 </div>
 
 <div *ngIf="transactions">
-  <app-table [data]="transactions"></app-table>
+  <app-table
+    [data]="trans"
+    [pending]="pending"
+    [approved]="approved"
+    [rejected]="rejected"
+    [tabs]="tabs"
+  ></app-table>
 </div>

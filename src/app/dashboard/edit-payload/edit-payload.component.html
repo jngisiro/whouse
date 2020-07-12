@@ -3,18 +3,221 @@
   <h1>Edit the requested info and submit</h1>
 
   <form class="form" (ngSubmit)="onSubmit(form)" #form="ngForm">
-    <label for="deliveryDate">
-      Delivary Date
-      <input
-        type="date"
-        [ngModel]="transaction.deliveryDate | date: 'yyyy-MM-dd'"
-        (ngModelChange)="newDeliveryDate = $event"
-        #deliveryDate="ngModel"
-        required
-        name="deliveryDate"
-      />
-    </label>
+    <mat-grid-list cols="2" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Supplier Name</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="transaction.supplierName"
+            #supplierName="ngModel"
+            required
+            name="supplierName"
+            required
+          />
+        </mat-form-field>
+      </mat-grid-tile>
 
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Delivery Date</mat-label>
+          <input
+            matInput
+            type="date"
+            [ngModel]="transaction?.deliveryDate | date: 'yyyy-MM-dd'"
+            (ngModelChange)="newDeliveryDate = $event"
+            #deliveryDate="ngModel"
+            required
+            name="deliveryDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="deliveryDateI"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #deliveryDateI></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="2">
+        <mat-form-field appearance="outline">
+          <mat-label>Description of items</mat-label>
+          <textarea
+            rows="5"
+            [(ngModel)]="transaction.payload"
+            name="payload"
+            #payload="ngModel"
+            matInput
+          ></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Select Location</mat-label>
+          <mat-select
+            [(ngModel)]="transaction.location"
+            #location="ngModel"
+            name="location"
+          >
+            <mat-option value="Adjumani">Adjumani</mat-option>
+            <mat-option value="Agago">Agago</mat-option>
+            <mat-option value="Arua">Arua</mat-option>
+            <mat-option value="Imvepi">Imvepi</mat-option>
+            <mat-option value="Kampala">Kampala</mat-option>
+            <mat-option value="Karamoja">Karamoja</mat-option>
+            <mat-option value="Kyak­a">Kyak­a</mat-option>
+            <mat-option value="Kitgum">Kitgum</mat-option>
+            <mat-option value="Kiryand­ongo">Kiryand­ongo</mat-option>
+            <mat-option value="Koboko">Koboko</mat-option>
+            <mat-option value="Lamwo">Lamwo</mat-option>
+            <mat-option value="Moyo">Moyo</mat-option>
+            <mat-option value="Nakivaale">Nakivaale</mat-option>
+            <mat-option value="Ne­bbi">Ne­bbi</mat-option>
+            <mat-option value="Obongi­">Obongi­</mat-option>
+            <mat-option value="Omugo">Omugo</mat-option>
+            <mat-option value="RhinoCamp">RhinoCamp</mat-option>
+            <mat-option value="Yumbe">Yumbe</mat-option>
+            <mat-option value="Zombo">Zombo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Payment Voucher Number</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="transaction.paymentVoucherNumber"
+            #paymentVoucherNumber="ngModel"
+            required
+            name="paymentVoucherNumber"
+            required
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Purchase Order Number</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="transaction.purchaseOrderNumber"
+            #purchaseOrderNumber="ngModel"
+            required
+            name="purchaseOrderNumber"
+            required
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Invoice Amount</mat-label>
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="transaction.invoiceAmount"
+            #invoiceAmount="ngModel"
+            required
+            name="invoiceAmount"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Withholding Tax</mat-label>
+          <mat-select
+            name="withholdingTax"
+            [(ngModel)]="transaction.withholdingTax"
+            #withholdingTax="ngModel"
+            required
+            (selectionChange)="calculateAmount($event, invoiceAmount)"
+          >
+            <mat-option value="0">0%</mat-option>
+            <mat-option value="6">6%</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Amount to be paid</mat-label>
+          <input
+            matInput
+            type="text"
+            [value]="amountCalculated | currency: 'UGX ':'code'"
+            ngModel
+            #amountToBePaid="ngModel"
+            name="amountToBePaid"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Project Code</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="transaction.projectCode"
+            #projectCode="ngModel"
+            required
+            name="projectCode"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Activity Line</mat-label>
+          <input
+            matInput
+            type="text"
+            [(ngModel)]="transaction.activityLine"
+            #activityLine="ngModel"
+            required
+            name="activityLine"
+          />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2" rowspan="2">
+        <mat-form-field appearance="outline">
+          <mat-label>Comment</mat-label>
+          <textarea
+            ngModel
+            #comment="ngModel"
+            name="comment"
+            required
+            rows="5"
+            placeholder="Additional Comments"
+            matInput
+          ></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <button
+      mat-raised-button
+      color="warn"
+      *ngIf="!loading"
+      [disabled]="form.invalid"
+    >
+      Submit Updates
+    </button>
+
+    <app-loading *ngIf="loading"></app-loading>
+  </form>
+</section>
+
+<!-- <section *ngIf="!loadingData" class="newpayload">
+  <h1>Edit the requested info and submit</h1>
+
+  <form class="form" (ngSubmit)="onSubmit(form)" #form="ngForm">
     <label for="payload">
       Description of Items
       <textarea
@@ -124,4 +327,4 @@
 
     <app-loading *ngIf="loading"></app-loading>
   </form>
-</section>
+</section> -->
