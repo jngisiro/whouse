@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/models/transaction.model';
 import { DataService } from 'src/app/services/data.service';
+import { Subject } from 'rxjs';
 @Component({
   selector: 'app-finance',
   templateUrl: './finance.component.html',
@@ -24,6 +25,8 @@ export class FinanceComponent implements OnInit {
   approved;
   rejected;
   loading: boolean = false;
+  searchKey;
+  searchSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private auth: AuthService,
@@ -74,9 +77,12 @@ export class FinanceComponent implements OnInit {
     });
   }
 
-  onSelect(id) {
-    this.router.navigate(['/transaction', id]);
+  applyFilter() {
+    this.searchSubject.next(this.searchKey);
   }
 
-  onSearch($event) {}
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
 }

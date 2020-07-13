@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { Transaction } from '../models/transaction.model';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,13 +6,16 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnInit, OnDestroy {
+  private eventsSubscription: Subscription;
+
   @Input() data: Transaction[];
   @Input() pending: Transaction[];
   @Input() rejected: Transaction[];
@@ -29,7 +32,7 @@ export class TableComponent implements OnInit {
     this.dataSource.paginator = paginator;
   }
 
-  searchKey: string = '';
+  @Input() searchKey: Observable<string>;
 
   displayedColumns: string[] = [
     'id',
@@ -51,10 +54,18 @@ export class TableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.data;
+    this.eventsSubscription = this.searchKey.subscribe((data) =>
+      this.onSearch(data)
+    );
   }
 
   onSelect(row) {
     this.router.navigate(['/transaction', row._id]);
+  }
+
+  onSearch(data: string) {
+    console.log(data);
+    this.dataSource.filter = data.trim().toLowerCase();
   }
 
   public tabChanged(tabChangeEvent: MatTabChangeEvent): void {
@@ -74,5 +85,9 @@ export class TableComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.eventsSubscription.unsubscribe();
   }
 }

@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
 import { Transaction } from 'src/app/models/transaction.model';
 import { DataService } from 'src/app/services/data.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-accounts',
@@ -23,6 +24,9 @@ export class AccountsComponent implements OnInit {
   pending;
   approved;
   rejected;
+
+  searchKey;
+  searchSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private auth: AuthService,
@@ -68,5 +72,12 @@ export class AccountsComponent implements OnInit {
     });
   }
 
-  onSearch($event) {}
+  applyFilter() {
+    this.searchSubject.next(this.searchKey);
+  }
+
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
+  }
 }

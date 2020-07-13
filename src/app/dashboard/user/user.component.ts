@@ -8,7 +8,7 @@ import { duration } from 'moment';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -21,6 +21,9 @@ export class UserComponent implements OnInit {
   approved;
   rejected;
   user: User;
+  searchKey;
+  searchSubject: Subject<string> = new Subject<string>();
+
   tabs = ['All', 'Pending', 'Rejections From Finance', 'Approvals For Payment'];
 
   transactions: Transaction[];
@@ -62,19 +65,13 @@ export class UserComponent implements OnInit {
     });
   }
 
-  onSearch($event) {
-    let val: string = (event.target as any).value;
-    const currentTransactions = this.transactions;
-    if (val) {
-      if (val.startsWith('0') || val.startsWith('00')) {
-        val = val.substr(1, val.length);
-      }
-      this.transactions = currentTransactions.filter((transaction) => {
-        return transaction.id.toString().indexOf(val) !== -1;
-      });
-    } else {
-      this.transactions = currentTransactions;
-    }
+  applyFilter() {
+    this.searchSubject.next(this.searchKey);
+  }
+
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
   }
 
   getTimeDifference(date) {

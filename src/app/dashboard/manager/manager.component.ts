@@ -7,6 +7,7 @@ import { DataService } from 'src/app/services/data.service';
 import { DatePipe, CurrencyPipe, DecimalPipe } from '@angular/common';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-manager',
@@ -37,6 +38,9 @@ export class ManagerComponent implements OnInit {
     'Rejections from Accounts',
     'Area Manager Approvals',
   ];
+
+  searchKey;
+  searchSubject: Subject<string> = new Subject<string>();
 
   constructor(
     private auth: AuthService,
@@ -141,21 +145,12 @@ export class ManagerComponent implements OnInit {
     );
   }
 
-  onSearch($event) {
-    let val: string = (event.target as any).value;
-    let regx = new RegExp(val);
-    if (val) {
-      if (val.startsWith('0')) {
-        val = val.substr(1, val.length);
-      } else if (val.startsWith('00')) {
-        console.log(val);
-        val = val.substr(2, val.length);
-      }
-      this.transactions = this.transactionCopy.filter((transaction) => {
-        return transaction.id.toString().indexOf(val) !== -1;
-      });
-    } else {
-      this.transactions = this.transactionCopy;
-    }
+  applyFilter() {
+    this.searchSubject.next(this.searchKey);
+  }
+
+  onSearchClear() {
+    this.searchKey = '';
+    this.applyFilter();
   }
 }

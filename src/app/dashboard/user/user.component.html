@@ -8,8 +8,21 @@
       floatLabel="never"
       appearance="outline"
     >
-      <input matInput placeholder="Search" autocomplete="off" />
-      <button mat-button matSuffix mat-icon-button aria-label="Clear">
+      <input
+        matInput
+        placeholder="Search"
+        [(ngModel)]="searchKey"
+        autocomplete="off"
+        (keyup)="applyFilter()"
+      />
+      <button
+        *ngIf="searchKey"
+        mat-button
+        matSuffix
+        (click)="onSearchClear()"
+        mat-icon-button
+        aria-label="Clear"
+      >
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
@@ -23,5 +36,6 @@
     [rejected]="rejected"
     [pending]="pending"
     [tabs]="tabs"
+    [searchKey]="searchSubject.asObservable()"
   ></app-table>
 </div>
