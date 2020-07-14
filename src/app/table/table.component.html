@@ -88,7 +88,7 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="paymentVoucherNumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Payment Voucher No.
+            Request For Payment No.
           </th>
           <td mat-cell *matCellDef="let element">
             {{ element.paymentVoucherNumber }}
@@ -118,7 +118,7 @@
             Status
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.status }}
+            {{ element.step === "approved" ? "closed" : element.step }}
           </td>
         </ng-container>
 
@@ -249,7 +249,7 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="paymentVoucherNumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Payment Voucher No.
+            Request For Payment No.
           </th>
           <td mat-cell *matCellDef="let element">
             {{ element.paymentVoucherNumber }}
@@ -279,7 +279,7 @@
             Status
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.status }}
+            {{ element.step === "approved" ? "closed" : element.step }}
           </td>
         </ng-container>
 
@@ -410,7 +410,7 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="paymentVoucherNumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Payment Voucher No.
+            Request For Payment No.
           </th>
           <td mat-cell *matCellDef="let element">
             {{ element.paymentVoucherNumber }}
@@ -440,7 +440,7 @@
             Status
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.status }}
+            {{ element.step === "approved" ? "closed" : element.step }}
           </td>
         </ng-container>
 
@@ -571,7 +571,7 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="paymentVoucherNumber">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Payment Voucher No.
+            Request For Payment No.
           </th>
           <td mat-cell *matCellDef="let element">
             {{ element.paymentVoucherNumber }}
@@ -601,7 +601,7 @@
             Status
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.status }}
+            {{ element.step === "approved" ? "closed" : element.step }}
           </td>
         </ng-container>
 
