@@ -37,6 +37,7 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.auth.user.subscribe((user) => {
       if (user && user.role === 'user') this.user = user;
       else this.router.navigate(['/']);
@@ -62,6 +63,8 @@ export class UserComponent implements OnInit {
       this.approved = this.trans.filter(
         (transaction) => transaction.step === 'approved'
       );
+
+      this.loading = false;
     });
   }
 

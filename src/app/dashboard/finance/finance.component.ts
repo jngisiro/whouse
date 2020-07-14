@@ -46,7 +46,6 @@ export class FinanceComponent implements OnInit {
 
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions;
-      this.loading = false;
 
       this.trans = this.transactions.filter((transaction) => {
         return (
@@ -74,6 +73,8 @@ export class FinanceComponent implements OnInit {
           transaction.step === 'accounts' ||
           transaction.step === 'approved'
       );
+
+      this.loading = false;
     });
   }
 

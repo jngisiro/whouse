@@ -1,41 +1,44 @@
-<div>
-  <div class="search">
-    <button mat-raised-button (click)="onCreate()" color="primary">
-      <mat-icon>add</mat-icon>Create
-    </button>
-    <mat-form-field
-      class="search-form-field"
-      floatLabel="never"
-      appearance="outline"
-    >
-      <input
-        matInput
-        placeholder="Search"
-        [(ngModel)]="searchKey"
-        autocomplete="off"
-        (keyup)="applyFilter()"
-      />
-      <button
-        *ngIf="searchKey"
-        mat-button
-        matSuffix
-        (click)="onSearchClear()"
-        mat-icon-button
-        aria-label="Clear"
-      >
-        <mat-icon>close</mat-icon>
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="!loading">
+  <div>
+    <div class="search">
+      <button mat-raised-button (click)="onCreate()" color="primary">
+        <mat-icon>add</mat-icon>Create
       </button>
-    </mat-form-field>
+      <mat-form-field
+        class="search-form-field"
+        floatLabel="never"
+        appearance="outline"
+      >
+        <input
+          matInput
+          placeholder="Search"
+          [(ngModel)]="searchKey"
+          autocomplete="off"
+          (keyup)="applyFilter()"
+        />
+        <button
+          *ngIf="searchKey"
+          mat-button
+          matSuffix
+          (click)="onSearchClear()"
+          mat-icon-button
+          aria-label="Clear"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
   </div>
-</div>
 
-<div *ngIf="trans">
-  <app-table
-    [data]="trans"
-    [approved]="approved"
-    [rejected]="rejected"
-    [pending]="pending"
-    [tabs]="tabs"
-    [searchKey]="searchSubject.asObservable()"
-  ></app-table>
+  <div *ngIf="trans">
+    <app-table
+      [data]="trans"
+      [approved]="approved"
+      [rejected]="rejected"
+      [pending]="pending"
+      [tabs]="tabs"
+      [searchKey]="searchSubject.asObservable()"
+    ></app-table>
+  </div>
 </div>

@@ -64,8 +64,9 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   onSearch(data: string) {
-    console.log(data);
-    this.dataSource.filter = data.trim().toLowerCase();
+    if (data) {
+      this.dataSource.filter = data.trim().toLowerCase();
+    }
   }
 
   public tabChanged(tabChangeEvent: MatTabChangeEvent): void {

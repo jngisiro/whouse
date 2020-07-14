@@ -65,7 +65,6 @@ export class ManagerComponent implements OnInit {
     this.ds.getAllTransaction(null).subscribe((transactions: any) => {
       this.transactions = transactions;
       this.transactionCopy = transactions;
-      this.loading = false;
       if (transactions) this.empty = false;
 
       // All Transactions
@@ -93,6 +92,8 @@ export class ManagerComponent implements OnInit {
         (transaction) =>
           transaction.step === 'accounts' || transaction.step === 'approved'
       );
+
+      this.loading = false;
     });
   }
 
