@@ -1,5 +1,9 @@
 <mat-tab-group mat-align-tabs="end" (selectedTabChange)="tabChanged($event)">
-  <mat-tab label="All">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">article</mat-icon>
+      All
+    </ng-template>
     <div>
       <table
         mat-table
@@ -156,7 +160,11 @@
       ></mat-paginator>
     </div>
   </mat-tab>
-  <mat-tab label="Pending">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">alarm</mat-icon>
+      Pending
+    </ng-template>
     <div>
       <table
         mat-table
@@ -313,7 +321,11 @@
       ></mat-paginator>
     </div>
   </mat-tab>
-  <mat-tab label="{{ tabs[2] || 'Rejections From Finance' }}">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">error</mat-icon>
+      {{ tabs[2] || "Rejections From Finance" }}
+    </ng-template>
     <div>
       <table
         mat-table
@@ -470,7 +482,11 @@
       ></mat-paginator>
     </div>
   </mat-tab>
-  <mat-tab label="{{ tabs[3] || 'Approvals For Payment' }}">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">offline_pin</mat-icon>
+      {{ tabs[3] || "Approvals For Payment" }}
+    </ng-template>
     <div>
       <table
         mat-table
