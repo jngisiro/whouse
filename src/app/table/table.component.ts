@@ -43,6 +43,7 @@ export class TableComponent implements OnInit, OnDestroy {
     'location',
     'amountToBePaid',
     'projectCode',
+    'activityLine',
     'paymentVoucherNumber',
     'supplierName',
     'status',
