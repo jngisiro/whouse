@@ -103,26 +103,29 @@ export class ManagerComponent implements OnInit {
       return {
         'Delivery Date': new Date(el.deliveryDate).toDateString(),
         'Date Submitted': new Date(el.paymentRequisitionDate).toDateString(),
-        'Amount To Be Paid': this.formatCurrency.transform(
-          el.amountToBePaid,
-          'UGX '
-        ),
-        'Tracking Number': this.decimalPipe.transform(el.id, '3.0'),
+        RFPNO: el.paymentVoucherNumber,
+        Requester: el.supplierName,
+        Location: el.location,
+        PO: el.purchaseOrderNumber,
+        Description: el.payload,
+        'Project Code': el.projectCode,
+        'Activity Line': el.activityLine,
+        Currency: 'UGX',
         'Invoice Amount': this.formatCurrency.transform(
           el.invoiceAmount,
           'UGX '
         ),
-        Description: el.payload,
-        'Activity Line': el.activityLine,
-        'Payment Voucher Number': el.paymentVoucherNumber,
-        'Project Code': el.projectCode,
-        'Purchase Order Number': el.purchaseOrderNumber,
         'Withholding Tax': el.withholdingTax + '%',
+        'Amount Payable': this.formatCurrency.transform(
+          el.amountToBePaid,
+          'UGX '
+        ),
         Office:
           el.step === 'submitted' || el.step === 'approved'
             ? 'Supply Chain'
             : el.step,
-        Status: el.rejected ? 'rejected' : 'pending',
+        Status: el.step !== 'approved' ? 'Open' : 'Closed',
+        TNO: this.decimalPipe.transform(el.id, '3.0'),
       };
     });
 

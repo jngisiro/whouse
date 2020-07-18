@@ -8,6 +8,8 @@ export interface Transaction {
   purchaseOrderNumber: number;
   projectCode: string;
   activityLine: string;
+  supplierName?: string;
+  location?: string;
   invoiceAmount?: number;
   withholdingTax?: number;
   description: string;
