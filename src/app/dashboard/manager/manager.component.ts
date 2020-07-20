@@ -112,15 +112,9 @@ export class ManagerComponent implements OnInit {
         'Project Code': el.projectCode,
         'Activity Line': el.activityLine,
         Currency: 'UGX',
-        'Invoice Amount': this.formatCurrency.transform(
-          el.invoiceAmount,
-          'UGX '
-        ),
+        'Invoice Amount': el.invoiceAmount,
+        'Amount Payable': el.amountToBePaid,
         'Withholding Tax': el.withholdingTax + '%',
-        'Amount Payable': this.formatCurrency.transform(
-          el.amountToBePaid,
-          'UGX '
-        ),
         Office:
           el.step === 'submitted' || el.step === 'approved'
             ? 'Supply Chain'
