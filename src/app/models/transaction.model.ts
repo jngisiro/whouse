@@ -15,6 +15,7 @@ export interface Transaction {
   description: string;
   amountToBePaid?: number;
   paymentRequisitionDate: Date;
+  submittedBy?: string;
   comments?: string[];
   step?: string;
   rejected: false;

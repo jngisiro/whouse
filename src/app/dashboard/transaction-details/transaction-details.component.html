@@ -39,13 +39,29 @@
       </mat-list-item>
 
       <mat-list-item>
-        <mat-icon mat-list-icon>multiple_stop</mat-icon>
+        <mat-icon mat-list-icon>do_not_touch</mat-icon>
         <div mat-line class="title">Withholding Tax</div>
         <div mat-line>{{ transaction.withholdingTax }}%</div>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-icon mat-list-icon>person_pin</mat-icon>
+        <div mat-line class="title">Submitted By</div>
+        <div mat-line>
+          {{ transaction.submittedBy }}
+        </div>
       </mat-list-item>
     </mat-list>
 
     <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>engineering</mat-icon>
+        <div mat-line class="title">Supplier Name</div>
+        <div mat-line>
+          {{ transaction.supplierName }}
+        </div>
+      </mat-list-item>
+
       <mat-list-item>
         <mat-icon mat-list-icon>style</mat-icon>
         <div mat-line class="title">Purchase Order Number</div>

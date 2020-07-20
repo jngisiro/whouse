@@ -103,8 +103,9 @@ export class ManagerComponent implements OnInit {
       return {
         'Delivery Date': new Date(el.deliveryDate).toDateString(),
         'Date Submitted': new Date(el.paymentRequisitionDate).toDateString(),
+        Requester: el.submittedBy,
         RFPNO: el.paymentVoucherNumber,
-        Requester: el.supplierName,
+        Supplier: el.supplierName,
         Location: el.location,
         PO: el.purchaseOrderNumber,
         Description: el.payload,
